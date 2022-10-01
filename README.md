@@ -1,5 +1,5 @@
-# Personal Project 
-![](../../../2c02a28e40ecf8cd5b20da43f6b3e8e0.gif)
+# Personal Project
+![](2c02a28e40ecf8cd5b20da43f6b3e8e0.gif)
 ### Budget Calculator
 
 For my CPSC 210 project, I will be creating a budget calculator that will allow the user to track their spending 
