@@ -6,10 +6,10 @@ For my CPSC 210 project, I will be creating a budget calculator that will allow 
 and budget allowing for more conscientious spending habits.
 
 ### User Stories
-- As a user, be able to add purchases to a list of expenses 
-- As a user, be able to date when the purchase was made
+- As a user, be able to add expenses to a list of expenses 
+- As a user, be able to date when the expense was made
 - As a user, be able to create names for expenses (ie. groceries, restaurant, entertainment)
 - As a user, be able to view the total expenses within a specific day, month, year, or name.
 
-extra: 
+extra (for the future):
 - add statistical charts...
