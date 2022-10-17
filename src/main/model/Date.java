@@ -18,9 +18,11 @@ public class Date {
     public int getDay() {
         return this.day;
     }
+
     public int getMonth() {
         return this.month;
     }
+
     public int getYear() {
         return this.year;
     }

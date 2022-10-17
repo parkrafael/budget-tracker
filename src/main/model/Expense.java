@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Expense {
 
-    private final double amount;
-    private final String purchaseName;
-    private final Date date;
+    private double amount;
+    private String purchaseName;
+    private Date date;
 
     // date fields:
     private int day;
