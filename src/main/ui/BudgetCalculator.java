@@ -112,6 +112,7 @@ public class BudgetCalculator {
             viewByYear();
             resetScreen();
         } else if (option.equals("d")) {
+            System.out.print("Name:");
             viewByName(scan.next());
             resetScreen();
         }
@@ -185,7 +186,6 @@ public class BudgetCalculator {
     // MODIFIES: N/A
     // EFFECTS: gives a receipt view of the expenses spent on the category chosen by user
     private void viewByName(String purchaseName) {
-        System.out.print("Name:");
         ArrayList<Expense> expAtYear = expAllList.getAllExpense();
 
         for (Expense e : expAtYear) {
