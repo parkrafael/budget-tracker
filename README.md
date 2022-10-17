@@ -8,9 +8,5 @@ and budget allowing for more conscientious spending habits.
 ### User Stories
 - As a user, be able to add expenses to a list of expenses 
 - As a user, be able to date their expenses (either automatically or by input)
-- As a user, view all of their expenses within a specific day, month, or year. 
-
-// 
-
+- As a user, view all of their expenses within a specific day, month, year, or category.
 - As a user, create categories for expenses (ie. groceries, restaurant, entertainment)
-- As a user, view how much you've spent for each category
