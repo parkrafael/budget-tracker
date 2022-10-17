@@ -1,7 +1,7 @@
 package model;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class ListOfExpenseTest {
     ListOfExpense listOfExpense;
 
 
-    @Before
+    @BeforeEach
     public void setup() {
         e1 = new Expense(7.39, "teddy bear", 6, 5, 2002);
 
