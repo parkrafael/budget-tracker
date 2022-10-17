@@ -66,4 +66,14 @@ public class ListOfExpense {
         return expenseAtYear;
     }
 
+//    // TODO: REQUIRES:
+//    // TODO: EFFECTS:
+//    public String printExpense() {
+//        for (Expense e: this.allExpense) {
+//            return e.getPurchaseName() + "purchased at" + e.getDate().getDay() + "/" + e.getDate().getMonth() + "/"
+//                    + e.getDate().getYear() + "for" + e.getAmount();
+//        }
+//        return "that's all!";
+//    }
+
 }

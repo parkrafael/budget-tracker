@@ -4,26 +4,28 @@ import model.Date;
 import model.Expense;
 import model.ListOfExpense;
 
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BudgetCalculator {
 
+    // expense
     private double amount;
     private String purchaseName;
     private Date date;
-
-    // date fields:
+    // date
     private int day;
     private int month;
     private int year;
 
-    // new Expense + listOfExpense
-    private Expense exp;
-    private ListOfExpense expAllList;
-
     // scanner
     Scanner scan = new Scanner(System.in);
+
+    // instantiating Expense + listOfExpense
+    Expense exp;
+    ListOfExpense expAllList = new ListOfExpense();
+
 
     // EFFECTS: runs the budget calculator application
     public BudgetCalculator() {
@@ -42,6 +44,7 @@ public class BudgetCalculator {
             System.out.println("Please press r if you would like to return back to the main menu");
             String returnScan = scan.next();
             if (returnScan.equals("r")) {
+                System.out.println(expAllList.getAllExpense());
                 runBudgetCalculator();
             }
         } else if (option.equals("b")) {
@@ -58,8 +61,6 @@ public class BudgetCalculator {
             runBudgetCalculator();
         }
     }
-
-
 
     // TODO: MODIFIES:
     // TODO: EFFECTS:
@@ -86,7 +87,6 @@ public class BudgetCalculator {
         year = scan.nextInt();
 
         exp = new Expense(amount, purchaseName, day, month, year);
-        expAllList = new ListOfExpense();
         expAllList.getAllExpense().add(exp);
     }
 
@@ -98,10 +98,13 @@ public class BudgetCalculator {
 
         if (option.equals("a")) {
             viewByDay();
+            resetScreen();
         } else if (option.equals("b")) {
             viewByMonth();
+            resetScreen();
         } else if (option.equals("c")) {
             viewByYear();
+            resetScreen();
         } else {
             return;
         }
@@ -110,20 +113,77 @@ public class BudgetCalculator {
 
     // TODO: MODIFIES:
     // TODO: EFFECTS:
-    private void viewByYear() {
+    private void resetScreen() {
+        String option = scan.next();
+        System.out.println("Please press r if you would like to return back to the main menu");
+        if (option.equals("r")) {
+            runBudgetCalculator();
+        } else {
+            return;
+        }
+    }
 
+    double sum;
+
+    // TODO: MODIFIES:
+    // TODO: EFFECTS:
+    private void viewByYear() {
+        System.out.print("Year: ");
+        int year = scan.nextInt();
+
+        ArrayList<Expense> expAtYear = expAllList.getExpenseAtYear(year);
+
+        for (Expense e : expAtYear) {
+            this.sum += e.getAmount();
+            System.out.println(e.printExpense());
+        }
+        System.out.println("Total: " + sum);
+        this.sum = 0;
     }
 
     // TODO: MODIFIES:
     // TODO: EFFECTS:
     private void viewByMonth() {
+        System.out.print("Month: ");
+        int month = scan.nextInt();
 
+        System.out.print("Year: ");
+        int year = scan.nextInt();
+
+        ArrayList<Expense> expAtMonth = expAllList.getExpenseAtMonth(month,year);
+
+        for (Expense e : expAtMonth) {
+            this.sum += e.getAmount();
+            System.out.println(e.printExpense());
+        }
+        System.out.println("Total: " + sum);
+        this.sum = 0;
     }
+
+
 
     // TODO: MODIFIES:
     // TODO: EFFECTS:
     private void viewByDay() {
+        System.out.print("Day: ");
+        int day = scan.nextInt();
+
+        System.out.print("Month: ");
+        int month = scan.nextInt();
+
+        System.out.print("Year: ");
+        int year = scan.nextInt();
+
+        ArrayList<Expense> expAtDay = expAllList.getExpenseAtDay(day,month,year);
+
+        for (Expense e : expAtDay) {
+            this.sum += e.getAmount();
+            System.out.println(e.printExpense());
+        }
+        System.out.println("Total: " + sum);
+        this.sum = 0;
     }
+
 
     // TODO: MODIFIES:
     // TODO: EFFECTS:

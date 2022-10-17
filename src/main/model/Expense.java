@@ -15,7 +15,7 @@ public class Expense {
     private int month;
     private int year;
 
-    // TODO: adding a category field for Expense
+    // TODO: adding a category field for Expense,, scratc that purchase name is category
 
     // constructor:
 
@@ -28,6 +28,7 @@ public class Expense {
         this.date = new Date(day, month, year);
     }
 
+
     // getters:
     public double getAmount() {
         return amount;
@@ -37,5 +38,11 @@ public class Expense {
     }
     public Date getDate() {
         return date;
+    }
+
+
+    public String printExpense() {
+        return this.purchaseName + " | $" + this.amount + " | " + this.getDate().getDay() + "/"
+                + this.getDate().getMonth() + "/" + this.getDate().getYear();
     }
 }
