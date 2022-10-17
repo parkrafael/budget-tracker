@@ -1,14 +1,16 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class ListOfExpense {
 
+    // fields:
     ArrayList<Expense> allExpense;
 
+    // constructor:
+    // REQUIRES: N/A
+    // MODIFIES: this
+    // EFFECTS: instantiates a new ListOfExpense
     public ListOfExpense() {
         this.allExpense = new ArrayList<>();
     }
@@ -18,11 +20,12 @@ public class ListOfExpense {
         return allExpense;
     }
 
-    // TODO: REQUIRES
-    // TODO: MODIFIES
-    // TODO: EFFECTS
+    // REQUIRES: day has the range of all positive numbers between [1-31]
+    //           month has the range of all positive numbers between [1-12]
+    //           year has the range of all positive non-zero numbers
+    // MODIFIES: N/A
+    // EFFECTS: returns all Expenses in ListOfExpense that fits the Date criteria given.
     public ArrayList<Expense> getExpenseAtDay(int day, int month, int year) {
-
         ArrayList<Expense> expenseAtDay = new ArrayList<>();
 
         for (Expense e : this.getAllExpense()) {
@@ -30,15 +33,14 @@ public class ListOfExpense {
                 expenseAtDay.add(e);
             }
         }
-
         return expenseAtDay;
     }
 
-    // TODO: REQUIRES
-    // TODO: MODIFIES
-    // TODO: EFFECTS
+    // REQUIRES: month has the range of all positive numbers between [1-12]
+    //           year has the range of all positive non-zero numbers
+    // MODIFIES: N/A
+    // EFFECTS: returns all Expenses in ListOfExpense that fits the Date criteria given.
     public ArrayList<Expense> getExpenseAtMonth(int month, int year) {
-
         ArrayList<Expense> expenseAtMonth = new ArrayList<>();
 
         for (Expense e : this.getAllExpense()) {
@@ -46,15 +48,13 @@ public class ListOfExpense {
                 expenseAtMonth.add(e);
             }
         }
-
         return expenseAtMonth;
     }
 
-    // TODO: REQUIRES
-    // TODO: MODIFIES
-    // TODO: EFFECTS
+    // REQUIRES: year has the range of all positive non-zero numbers
+    // MODIFIES: N/A
+    // EFFECTS: returns all Expenses in ListOfExpense that fits the Date criteria given.
     public ArrayList<Expense> getExpenseAtYear(int year) {
-
         ArrayList<Expense> expenseAtYear = new ArrayList<>();
 
         for (Expense e : this.getAllExpense()) {
@@ -62,18 +62,7 @@ public class ListOfExpense {
                 expenseAtYear.add(e);
             }
         }
-
         return expenseAtYear;
     }
-
-//    // TODO: REQUIRES:
-//    // TODO: EFFECTS:
-//    public String printExpense() {
-//        for (Expense e: this.allExpense) {
-//            return e.getPurchaseName() + "purchased at" + e.getDate().getDay() + "/" + e.getDate().getMonth() + "/"
-//                    + e.getDate().getYear() + "for" + e.getAmount();
-//        }
-//        return "that's all!";
-//    }
 
 }

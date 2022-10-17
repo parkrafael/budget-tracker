@@ -6,45 +6,46 @@ import java.time.format.DateTimeFormatter;
 
 public class Expense {
 
+    // fields:
     private double amount;
-    private String purchaseName;
+    private String name;
     private Date date;
 
-    // date fields:
-    private int day;
-    private int month;
-    private int year;
-
-    // TODO: adding a category field for Expense,, scratc that purchase name is category
-
     // constructor:
-
-    // TODO: REQUIRES:
-    // TODO: EFFECTS:
-    public Expense(double amount, String purchaseName, int day, int month, int year) {
+    // REQUIRES: string has a non-zero length
+    //           day has the range of all positive numbers between [1-31]
+    //           month has the range of all positive numbers between [1-12]
+    //           year has the range of all positive non-zero numbers
+    // MODIFIES: this
+    // EFFECTS: instantiates Expense with the variables given
+    public Expense(double amount, String name, int day, int month, int year) {
         this.amount = amount;
-        this.purchaseName = purchaseName;
-        // date purchase was added
+        this.name = name;
         this.date = new Date(day, month, year);
     }
-
 
     // getters:
     public double getAmount() {
         return amount;
     }
 
-    public String getPurchaseName() {
-        return purchaseName;
+    public String getName() {
+        return name;
     }
 
     public Date getDate() {
         return date;
     }
 
-
+    // TODO: tests
+    // REQUIRES: N/A
+    // MODIFIES: N/A
+    // EFFECTS: prints out a receipt for the expense given (including name, amount, and date all in one string
     public String printExpense() {
-        return this.purchaseName + " | $" + this.amount + " | " + this.getDate().getDay() + "/"
-                + this.getDate().getMonth() + "/" + this.getDate().getYear();
+        String receipt;
+        receipt = this.name + " | $" + this.amount + " | " + this.getDate().getDay() + "/" + this.getDate().getMonth()
+                + "/" + this.getDate().getYear();
+
+        return receipt;
     }
 }

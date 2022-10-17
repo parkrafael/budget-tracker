@@ -1,32 +1,34 @@
 package ui;
 
-import model.Date;
 import model.Expense;
 import model.ListOfExpense;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BudgetCalculator {
 
+    // - fields -
     // expense
     private double amount;
-    private String purchaseName;
-    private Date date;
+    private String name;
+
     // date
     private int day;
     private int month;
     private int year;
 
+    // sum (for calculating total)
+    double sum;
+
     // scanner
     Scanner scan = new Scanner(System.in);
 
-    // instantiating Expense + listOfExpense
+    // instantiating expense + listOfExpense
     Expense exp;
     ListOfExpense expAllList = new ListOfExpense();
 
-
+    // - constructor -
     // EFFECTS: runs the budget calculator application
     public BudgetCalculator() {
         runBudgetCalculator();
@@ -35,25 +37,16 @@ public class BudgetCalculator {
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runBudgetCalculator() {
-        // display menu
+        // initial menu
         initMenu();
         String option = scan.next();
 
         if (option.equals("a")) {
             addExpenseMenu();
-            System.out.println("Please press r if you would like to return back to the main menu");
-            String returnScan = scan.next();
-            if (returnScan.equals("r")) {
-                System.out.println(expAllList.getAllExpense());
-                runBudgetCalculator();
-            }
+            resetScreen();
         } else if (option.equals("b")) {
             viewExpenseMenu();
-            System.out.println("Please press r if you would like to return back to the main menu");
-            String returnScan = scan.next();
-            if (returnScan.equals("r")) {
-                runBudgetCalculator();
-            }
+            resetScreen();
         } else if (option.equals("c")) {
             return;
         } else {
@@ -62,8 +55,8 @@ public class BudgetCalculator {
         }
     }
 
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: menu for the initial screen
     private void initMenu() {
         System.out.println("Welcome to your Budget Book! Please select an option.");
         System.out.println("(a) Add expense");
@@ -71,14 +64,26 @@ public class BudgetCalculator {
         System.out.println("(c) Quit");
     }
 
-    // creates new expense, adds it to a new instance of listOfExpense
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
+    // MODIFIES: this
+    // EFFECTS: gives user a prompt to reset screen to the home page, or exit
+    private void resetScreen() {
+        System.out.println("Please press r if you would like to return back to the main menu");
+        String option = scan.next();
+
+        if (option.equals("r")) {
+            // just a tracker for myself to see that the expenses are being added properly to the list
+            System.out.println(expAllList.getAllExpense());
+            runBudgetCalculator();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates new expense with input from user, adds expense to expAllList
     private void addExpenseMenu() {
         System.out.print("Expense amount: $");
         amount = scan.nextDouble();
         System.out.print("Expense name: ");
-        purchaseName = scan.next();
+        name = scan.next();
         System.out.print("Day of purchase: ");
         day = scan.nextInt();
         System.out.print("Month of purchase: ");
@@ -86,12 +91,13 @@ public class BudgetCalculator {
         System.out.print("Year of purchase: ");
         year = scan.nextInt();
 
-        exp = new Expense(amount, purchaseName, day, month, year);
+        exp = new Expense(amount, name, day, month, year);
         expAllList.getAllExpense().add(exp);
     }
 
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
+    // MODIFIES: N/A
+    // EFFECTS: gives prompt for user to choose what view of expenses they would like to see, then it gives that view
+    //          + the total spent for that category/date
     private void viewExpenseMenu() {
         initViewMenu();
         String option = scan.next();
@@ -105,102 +111,14 @@ public class BudgetCalculator {
         } else if (option.equals("c")) {
             viewByYear();
             resetScreen();
-        } else {
-            return;
-        }
-
-    }
-
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
-    private void resetScreen() {
-        String option = scan.next();
-        System.out.println("Please press r if you would like to return back to the main menu");
-        if (option.equals("r")) {
-            runBudgetCalculator();
-        } else {
-            return;
+        } else if (option.equals("d")) {
+            viewByName(scan.next());
+            resetScreen();
         }
     }
 
-    double sum;
-
-//    // TODO: MODIFIES:
-//    // TODO: EFFECTS:
-//    private void viewByName() {
-//        ArrayList<Expense> expAtYear = expAllList.getAllExpense();
-//
-//        for (Expense e : expAtYear) {
-//            if (e.getPurchaseName() == )
-//            this.sum += e.getAmount();
-//            System.out.println(e.printExpense());
-//        }
-//        System.out.println("Total: " + sum);
-//        this.sum = 0;
-//    }
-
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
-    private void viewByYear() {
-        System.out.print("Year: ");
-        int year = scan.nextInt();
-
-        ArrayList<Expense> expAtYear = expAllList.getExpenseAtYear(year);
-
-        for (Expense e : expAtYear) {
-            this.sum += e.getAmount();
-            System.out.println(e.printExpense());
-        }
-        System.out.println("Total: " + sum);
-        this.sum = 0;
-    }
-
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
-    private void viewByMonth() {
-        System.out.print("Month: ");
-        int month = scan.nextInt();
-
-        System.out.print("Year: ");
-        int year = scan.nextInt();
-
-        ArrayList<Expense> expAtMonth = expAllList.getExpenseAtMonth(month,year);
-
-        for (Expense e : expAtMonth) {
-            this.sum += e.getAmount();
-            System.out.println(e.printExpense());
-        }
-        System.out.println("Total: " + sum);
-        this.sum = 0;
-    }
-
-
-
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
-    private void viewByDay() {
-        System.out.print("Day: ");
-        int day = scan.nextInt();
-
-        System.out.print("Month: ");
-        int month = scan.nextInt();
-
-        System.out.print("Year: ");
-        int year = scan.nextInt();
-
-        ArrayList<Expense> expAtDay = expAllList.getExpenseAtDay(day,month,year);
-
-        for (Expense e : expAtDay) {
-            this.sum += e.getAmount();
-            System.out.println(e.printExpense());
-        }
-        System.out.println("Total: " + sum);
-        this.sum = 0;
-    }
-
-
-    // TODO: MODIFIES:
-    // TODO: EFFECTS:
+    // MODIFIES: N/A
+    // EFFECTS: menu for the viewExpenseMenu
     private void initViewMenu() {
         System.out.println("Please select an option.");
         System.out.println("(a) View by Day");
@@ -209,5 +127,74 @@ public class BudgetCalculator {
         System.out.println("(d) View by Name");
     }
 
+    // MODIFIES: N/A
+    // EFFECTS: gives a receipt view of the expenses spent on the day chosen by user
+    private void viewByDay() {
+        System.out.print("Day: ");
+        int day = scan.nextInt();
+        System.out.print("Month: ");
+        int month = scan.nextInt();
+        System.out.print("Year: ");
+        int year = scan.nextInt();
 
+        ArrayList<Expense> expAtDay = expAllList.getExpenseAtDay(day,month,year);
+
+        for (Expense e : expAtDay) {
+            this.sum += e.getAmount();
+            System.out.print(e.printExpense());
+        }
+        System.out.print("Total: " + sum);
+        // reset sum count as we're using the same variable for all sum
+        this.sum = 0;
+    }
+
+    // MODIFIES: N/A
+    // EFFECTS: gives a receipt view of the expenses spent on the month chosen by user
+    private void viewByMonth() {
+        System.out.print("Month: ");
+        int month = scan.nextInt();
+        System.out.print("Year: ");
+        int year = scan.nextInt();
+
+        ArrayList<Expense> expAtMonth = expAllList.getExpenseAtMonth(month,year);
+
+        for (Expense e : expAtMonth) {
+            this.sum += e.getAmount();
+            System.out.print(e.printExpense());
+        }
+        System.out.print("Total: " + sum);
+        this.sum = 0;
+    }
+
+    // MODIFIES: N/A
+    // EFFECTS: gives a receipt view of the expenses spent on the year chosen by user
+    private void viewByYear() {
+        System.out.print("Year: ");
+        int year = scan.nextInt();
+
+        ArrayList<Expense> expAtYear = expAllList.getExpenseAtYear(year);
+
+        for (Expense e : expAtYear) {
+            this.sum += e.getAmount();
+            System.out.print(e.printExpense());
+        }
+        System.out.print("Total: " + sum);
+        this.sum = 0;
+    }
+
+    // MODIFIES: N/A
+    // EFFECTS: gives a receipt view of the expenses spent on the category chosen by user
+    private void viewByName(String purchaseName) {
+        System.out.print("Name:");
+        ArrayList<Expense> expAtYear = expAllList.getAllExpense();
+
+        for (Expense e : expAtYear) {
+            if (e.getName().equals(purchaseName)) {
+                this.sum += e.getAmount();
+                System.out.println(e.printExpense());
+            }
+        }
+        System.out.println("Total: " + sum);
+        this.sum = 0;
+    }
 }
