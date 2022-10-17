@@ -125,6 +125,20 @@ public class BudgetCalculator {
 
     double sum;
 
+//    // TODO: MODIFIES:
+//    // TODO: EFFECTS:
+//    private void viewByName() {
+//        ArrayList<Expense> expAtYear = expAllList.getAllExpense();
+//
+//        for (Expense e : expAtYear) {
+//            if (e.getPurchaseName() == )
+//            this.sum += e.getAmount();
+//            System.out.println(e.printExpense());
+//        }
+//        System.out.println("Total: " + sum);
+//        this.sum = 0;
+//    }
+
     // TODO: MODIFIES:
     // TODO: EFFECTS:
     private void viewByYear() {
@@ -192,6 +206,7 @@ public class BudgetCalculator {
         System.out.println("(a) View by Day");
         System.out.println("(b) View by Month");
         System.out.println("(c) View by Year");
+        System.out.println("(d) View by Name");
     }
 
 
