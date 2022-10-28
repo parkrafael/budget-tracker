@@ -142,9 +142,9 @@ public class BudgetCalculator {
 
         for (Expense e : expAtDay) {
             this.sum += e.getAmount();
-            System.out.print(e.printExpense());
+            System.out.println(e.printExpense());
         }
-        System.out.print("Total: " + sum);
+        System.out.println("Total: " + sum);
         // reset sum count as we're using the same variable for all sum
         this.sum = 0;
     }
@@ -161,9 +161,9 @@ public class BudgetCalculator {
 
         for (Expense e : expAtMonth) {
             this.sum += e.getAmount();
-            System.out.print(e.printExpense());
+            System.out.println(e.printExpense());
         }
-        System.out.print("Total: " + sum);
+        System.out.println("Total: " + sum);
         this.sum = 0;
     }
 
@@ -177,9 +177,9 @@ public class BudgetCalculator {
 
         for (Expense e : expAtYear) {
             this.sum += e.getAmount();
-            System.out.print(e.printExpense());
+            System.out.println(e.printExpense());
         }
-        System.out.print("Total: " + sum);
+        System.out.println("Total: " + sum);
         this.sum = 0;
     }
 
