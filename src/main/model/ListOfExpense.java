@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class ListOfExpense implements Writable {
 
     // fields:
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    public ArrayList<Expense> allExpense;
+    private ArrayList<Expense> allExpense;
 
     // constructor:
     // REQUIRES: N/A
