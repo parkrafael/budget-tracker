@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Expense {
+public class Expense implements Writable {
 
     // fields:
     private double amount;
@@ -47,5 +50,15 @@ public class Expense {
                 + "/" + this.getDate().getYear();
 
         return receipt;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("amount", amount);
+        json.put("name", name);
+        json.put("day", date);
+
+        return json;
     }
 }

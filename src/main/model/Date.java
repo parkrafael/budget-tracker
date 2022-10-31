@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // ** need to add class descriptor
-public class Date {
+public class Date implements Writable {
 
     int day;
     int year;
@@ -30,6 +33,16 @@ public class Date {
 
     public int getYear() {
         return year;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("day", day);
+        json.put("month", month);
+        json.put("year", year);
+
+        return json;
     }
 
 }

@@ -1,11 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class ListOfExpense {
+public class ListOfExpense implements Writable {
 
     // fields:
-    ArrayList<Expense> allExpense;
+    @SuppressWarnings("checkstyle:VisibilityModifier")
+    public ArrayList<Expense> allExpense;
 
     // constructor:
     // REQUIRES: N/A
@@ -18,6 +23,12 @@ public class ListOfExpense {
     // getters:
     public ArrayList<Expense> getAllExpense() {
         return allExpense;
+    }
+
+    // TODO: this method
+    public void addExpense(Expense expense) {
+        ArrayList<Expense> allExpense = getAllExpense();
+        allExpense.add(expense);
     }
 
     // REQUIRES: day has the range of all positive numbers between [1-31]
@@ -63,6 +74,24 @@ public class ListOfExpense {
             }
         }
         return expenseAtYear;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("allExpense", thingiesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray thingiesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Expense e : allExpense) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

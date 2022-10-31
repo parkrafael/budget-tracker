@@ -2,11 +2,19 @@ package ui;
 
 import model.Expense;
 import model.ListOfExpense;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BudgetCalculator {
+
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/workroom.json";
 
     // - fields -
     // expense
@@ -31,6 +39,8 @@ public class BudgetCalculator {
     // - constructor -
     // EFFECTS: runs the budget calculator application
     public BudgetCalculator() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runBudgetCalculator();
     }
 
@@ -48,6 +58,10 @@ public class BudgetCalculator {
             viewExpenseMenu();
             resetScreen();
         } else if (option.equals("c")) {
+            saveWorkRoom();
+        } else if (option.equals("d")) {
+            loadWorkRoom();
+        } else if (option.equals("e")) {
             return;
         } else {
             System.out.println("Please select a valid option...");
@@ -61,7 +75,9 @@ public class BudgetCalculator {
         System.out.println("Welcome to your Budget Book! Please select an option.");
         System.out.println("(a) Add expense");
         System.out.println("(b) View expense");
-        System.out.println("(c) Quit");
+        System.out.println("(c) Save ");
+        System.out.println("(d) Load");
+        System.out.println("(e) Quit");
     }
 
     // MODIFIES: this
@@ -196,5 +212,27 @@ public class BudgetCalculator {
         }
         System.out.println("Total: " + sum);
         this.sum = 0;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            expAllList = jsonReader.read();
+            System.out.println("Loaded " + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    private void saveWorkRoom() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(expAllList);
+            jsonWriter.close();
+            System.out.println("Saved " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 }
