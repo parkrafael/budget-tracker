@@ -1,19 +1,10 @@
 {
     "name": "",
-    "list of expenses": [
-        {
-            "amount": 10.71,
-            "month": 1,
-            "year": 2022,
-            "name": "airpods",
-            "day": 1
-        },
-        {
-            "amount": 20,
-            "month": 4,
-            "year": 2022,
-            "name": "candy",
-            "day": 4
-        }
-    ]
+    "list of expenses": [{
+        "amount": 20,
+        "month": 2,
+        "year": 2022,
+        "name": "rafael",
+        "day": 2
+    }]
 }

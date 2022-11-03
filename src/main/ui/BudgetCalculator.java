@@ -66,10 +66,6 @@ public class BudgetCalculator {
                 // TODO: add load option here
                 return;
             case "e":
-                return;
-            default:
-                System.out.println("Please select a valid option...");
-                runBudgetCalculator();
         }
     }
 
@@ -235,16 +231,8 @@ public class BudgetCalculator {
         this.sum = 0;
     }
 
-//    // MODIFIES: this
-//    // EFFECTS: loads workroom from file
-//    private void loadWorkRoom() {
-//        try {
-//            expAllList = jsonReader.read();
-//            System.out.println("Loaded " + " from " + JSON_STORE);
-//        } catch (IOException e) {
-//            System.out.println("Unable to read from file: " + JSON_STORE);
-//        }
-//    }
+    // ==============================
+    // DATA PERSISTENCE:
 
     private void saveWorkRoom() {
         try {
@@ -256,4 +244,16 @@ public class BudgetCalculator {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
+
+//    // MODIFIES: this
+//    // EFFECTS: loads workroom from file
+//    private void loadWorkRoom() {
+//        try {
+//            expAllList = jsonReader.read();
+//            System.out.println("Loaded " + " from " + JSON_STORE);
+//        } catch (IOException e) {
+//            System.out.println("Unable to read from file: " + JSON_STORE);
+//        }
+//    }
+
 }
