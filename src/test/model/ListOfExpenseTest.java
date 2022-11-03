@@ -34,11 +34,26 @@ public class ListOfExpenseTest {
 
         listOfExpense = new ListOfExpense();
 
-        listOfExpense.getListOfExpense().add(e1);
-        listOfExpense.getListOfExpense().add(e2);
-        listOfExpense.getListOfExpense().add(e3);
-        listOfExpense.getListOfExpense().add(e4);
-        listOfExpense.getListOfExpense().add(e5);
+        listOfExpense.addExpense(e1);
+        listOfExpense.addExpense(e2);
+        listOfExpense.addExpense(e3);
+        listOfExpense.addExpense(e4);
+        listOfExpense.addExpense(e5);
+    }
+
+    @Test
+    public void addExpenseTest() {
+        boolean e1test = listOfExpense.getListOfExpense().contains(e1);
+        boolean e2test = listOfExpense.getListOfExpense().contains(e2);
+        boolean e3test = listOfExpense.getListOfExpense().contains(e3);
+        boolean e4test  =listOfExpense.getListOfExpense().contains(e4);
+        boolean e5test = listOfExpense.getListOfExpense().contains(e5);
+
+        assertTrue(e1test);
+        assertTrue(e2test);
+        assertTrue(e3test);
+        assertTrue(e4test);
+        assertTrue(e5test);
     }
 
     @Test
