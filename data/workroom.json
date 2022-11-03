@@ -1,12 +1,19 @@
-{"allExpense": [
-    {
-        "amount": 300,
-        "name": "leaf",
-        "day": "model.Date@5ae9a829"
-    },
-    {
-        "amount": 400,
-        "name": "ras",
-        "day": "model.Date@6d8a00e3"
-    }
-]}
+{
+    "name": "",
+    "list of expenses": [
+        {
+            "amount": 10.71,
+            "month": 1,
+            "year": 2022,
+            "name": "airpods",
+            "day": 1
+        },
+        {
+            "amount": 20,
+            "month": 4,
+            "year": 2022,
+            "name": "candy",
+            "day": 4
+        }
+    ]
+}

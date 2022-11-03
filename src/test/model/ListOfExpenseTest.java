@@ -34,11 +34,11 @@ public class ListOfExpenseTest {
 
         listOfExpense = new ListOfExpense();
 
-        listOfExpense.getAllExpense().add(e1);
-        listOfExpense.getAllExpense().add(e2);
-        listOfExpense.getAllExpense().add(e3);
-        listOfExpense.getAllExpense().add(e4);
-        listOfExpense.getAllExpense().add(e5);
+        listOfExpense.getListOfExpense().add(e1);
+        listOfExpense.getListOfExpense().add(e2);
+        listOfExpense.getListOfExpense().add(e3);
+        listOfExpense.getListOfExpense().add(e4);
+        listOfExpense.getListOfExpense().add(e5);
     }
 
     @Test
