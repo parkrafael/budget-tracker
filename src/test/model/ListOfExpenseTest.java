@@ -65,16 +65,34 @@ public class ListOfExpenseTest {
 
         assertEquals(listOfExpense.getExpenseAtDay(15,12,2021), testAtDay1);
 
-        // one item on the day
+        // zero expenses on day
+        ArrayList<Expense> testAtDay3 = new ArrayList<>();
+
+        assertEquals(listOfExpense.getExpenseAtDay(12,12,2002), testAtDay3);
+
+        // multiple expenses with same day, but different year
+        ArrayList<Expense> testAtDay4 = new ArrayList<>();
+        Expense e6 = new Expense(7.39, "teddy bear", 6, 5, 1999);
+
+        listOfExpense.addExpense(e6);
+        testAtDay4.add(e6);
+
+        assertEquals(listOfExpense.getExpenseAtDay(6,5,1999), testAtDay4);
+
+        // multiple expenses with same day, but different month
+        ArrayList<Expense> testAtDay5 = new ArrayList<>();
+        Expense e7 = new Expense(7.39, "teddy bear", 6, 7, 2002);
+
+        listOfExpense.addExpense(e7);
+        testAtDay5.add(e7);
+
+        assertEquals(listOfExpense.getExpenseAtDay(6,7,2002), testAtDay5);
+
+        // one expenses on the day
         ArrayList<Expense> testAtDay2 = new ArrayList<>();
         testAtDay2.add(e1);
 
         assertEquals(listOfExpense.getExpenseAtDay(6,5,2002), testAtDay2);
-
-        // zero item on day
-        ArrayList<Expense> testAtDay3 = new ArrayList<>();
-
-        assertEquals(listOfExpense.getExpenseAtDay(12,12,2002), testAtDay3);
     }
 
     @Test
@@ -128,9 +146,6 @@ public class ListOfExpenseTest {
         ArrayList<Expense> testAtYear3 = new ArrayList<>();
 
         assertEquals(listOfExpense.getExpenseAtYear(2022), testAtYear3);
-
-
-
     }
 
 }
