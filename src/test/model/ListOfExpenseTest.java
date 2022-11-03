@@ -96,6 +96,15 @@ public class ListOfExpenseTest {
         ArrayList<Expense> testAtMonth3 = new ArrayList<>();
 
         assertEquals(listOfExpense.getExpenseAtMonth(10,2022), testAtMonth3);
+
+        // e6 is month 12 but 2022, e4 & e5 are month 12 but 2021
+        Expense e6 = new Expense(10.00, "doordash", 15, 12, 2022);
+        listOfExpense.addExpense(e6);
+
+        ArrayList<Expense> testAtMonth5 = new ArrayList<>();
+        testAtMonth5.add(e6);
+
+        assertEquals(listOfExpense.getExpenseAtMonth(12, 2022), testAtMonth5);
     }
 
     @Test
