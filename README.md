@@ -14,8 +14,9 @@ P1:
 - As a user, be able to view the total expenses within a specific day, month, year, or name.
 
 P2: 
-- As a user, save the expenses added to file
-- As a user, load the list of expenses from file
+- As a user, be able to save expenses to file
+- As a user, be able to load the list of expenses from file
+- As a user, be able to create multiple accounts with individual list of expenses
 
 
 extra (for the future):

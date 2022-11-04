@@ -6,14 +6,14 @@ import persistence.Writable;
 
 import java.util.ArrayList;
 
-// TODO: class descriptor
+// Represents a ListOfExpense having a collection of Expenses
 public class ListOfExpense implements Writable {
     // ==============================
     // FIELDS:
 
     // constructor:
     private final ArrayList<Expense> listOfExpense;
-    private final String name;
+    private String name;
 
     // ==============================
     // CONSTRUCTOR:
@@ -21,7 +21,7 @@ public class ListOfExpense implements Writable {
     // REQUIRES: N/A
     // MODIFIES: this
     // EFFECTS: instantiates a new ListOfExpense
-    public ListOfExpense() {
+    public ListOfExpense(String name) {
         this.name = "All Expenses";
         this.listOfExpense = new ArrayList<>();
     }
@@ -42,10 +42,18 @@ public class ListOfExpense implements Writable {
     }
 
     // ==============================
+    // SETTERS:
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // ==============================
     // METHODS:
 
-    // TODO: add specification for addExpense
-    // TODO: add tests for addExpense
+    // REQUIRES: N/A
+    // MODIFIES: this
+    // EFFECTS: adds Expense to given ListOfExpense
     public void addExpense(Expense expense) {
         listOfExpense.add(expense);
     }
@@ -102,8 +110,10 @@ public class ListOfExpense implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+
         json.put("name", name);
         json.put("expenses", expenseToJson());
+
         return json;
     }
 

@@ -45,7 +45,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
 
         // creates a new listOfExpense
-        ListOfExpense listOfExpense = new ListOfExpense();
+        ListOfExpense listOfExpense = new ListOfExpense(name);
 
         // adds expenses in workroom.json to listOfExpense
         addExpenses(listOfExpense, jsonObject);

@@ -1,0 +1,19 @@
+{
+    "name": "All Expenses",
+    "expenses": [
+        {
+            "amount": 30,
+            "month": 5,
+            "year": 2022,
+            "name": "airpods",
+            "day": 3
+        },
+        {
+            "amount": 50,
+            "month": 15,
+            "year": 2022,
+            "name": "carrots",
+            "day": 3
+        }
+    ]
+}

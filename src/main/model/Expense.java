@@ -3,7 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-// TODO: class descriptor
+// Represents a Expense, having a amount, name, and date (day/month/year)
 public class Expense implements Writable {
     // ==============================
     // FIELDS:
@@ -58,7 +58,6 @@ public class Expense implements Writable {
     // ==============================
     // METHODS:
 
-    // TODO: need to add more tests for printExpense
     // REQUIRES: N/A
     // MODIFIES: N/A
     // EFFECTS: prints out a receipt for the expense given (including name, amount, and date all in one string
@@ -73,6 +72,7 @@ public class Expense implements Writable {
     // ==============================
     // DATA PERSISTENCE:
 
+    // code derived from P2 example
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

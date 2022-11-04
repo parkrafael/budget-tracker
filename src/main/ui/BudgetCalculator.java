@@ -5,20 +5,26 @@ import model.ListOfExpense;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// TODO: class descriptor
+import static java.lang.System.exit;
+
+// Represents the BudgetCalculator application
 public class BudgetCalculator {
     // ==============================
     // FIELDS:
 
     // data persistence:
-    private final JsonWriter jsonWriter;
-    private final JsonReader jsonReader;
-    private static final String JSON_STORE = "./data/workroom.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private String directory;
 
     // sum (for calculating total):
     double sum;
@@ -28,15 +34,14 @@ public class BudgetCalculator {
 
     // instantiating expense & listOfExpense:
     Expense expense;
-    ListOfExpense listOfExpense = new ListOfExpense();
+    ListOfExpense listOfExpense;
 
     // ==============================
     // CONSTRUCTOR:
 
     // EFFECTS: runs the budget calculator application
     public BudgetCalculator() {
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
+        loginMenu();
         runBudgetCalculator();
     }
 
@@ -67,10 +72,34 @@ public class BudgetCalculator {
                 resetScreen();
                 break;
             case "d":
-                // TODO: add load option here
                 loadWorkRoom();
                 resetScreen();
+                break;
             case "e":
+                System.exit(0);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: if name exists in data provide the data with name, create a new file otherwise
+    private void loginMenu() {
+        System.out.print("Please enter your name:");
+
+        String name = scan.next();
+        directory = "./data/" + name + ".json";
+        Path path = Paths.get(directory);
+
+        if (Files.exists(path)) {
+            jsonWriter = new JsonWriter(directory);
+            jsonReader = new JsonReader(directory);
+            loadWorkRoom();
+        } else {
+            File file = new File("./data/" + name + ".json");
+            directory = "./data/" + name + ".json";
+
+            jsonWriter = new JsonWriter(directory);
+            jsonReader = new JsonReader(directory);
+            listOfExpense = new ListOfExpense(name);
         }
     }
 
@@ -95,6 +124,8 @@ public class BudgetCalculator {
             // just a tracker for myself to see that the expenses are being added properly to the list
             System.out.println(listOfExpense.getListOfExpense());
             runBudgetCalculator();
+        } else {
+            System.exit(0);
         }
     }
 
@@ -110,7 +141,7 @@ public class BudgetCalculator {
 
         System.out.print("Expense amount: $");
         amount = scan.nextDouble();
-        System.out.print("Expense name: ");
+        System.out.print("Expense name:");
         name = scan.next();
         System.out.print("Day of purchase: ");
         day = scan.nextInt();
@@ -151,7 +182,7 @@ public class BudgetCalculator {
                 viewByName(scan.next());
                 resetScreen();
                 break;
-            default:
+            case "e":
                 resetScreen();
         }
     }
@@ -244,9 +275,9 @@ public class BudgetCalculator {
             jsonWriter.open();
             jsonWriter.write(listOfExpense);
             jsonWriter.close();
-            System.out.println("Saved " + " to " + JSON_STORE);
+            System.out.println("Saved " + " to " + directory);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            System.out.println("Unable to write to file: " + directory);
         }
     }
 
@@ -255,9 +286,9 @@ public class BudgetCalculator {
     private void loadWorkRoom() {
         try {
             listOfExpense = jsonReader.read();
-            System.out.println("Loaded " + listOfExpense.getName() + " from " + JSON_STORE);
+            System.out.println("Loaded " + listOfExpense.getName() + " from " + directory);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("Unable to read from file: " + directory);
         }
     }
 
