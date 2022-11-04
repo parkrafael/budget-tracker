@@ -13,7 +13,7 @@ public class ListOfExpense implements Writable {
 
     // constructor:
     private final ArrayList<Expense> listOfExpense;
-    private String name;
+    private final String name;
 
     // ==============================
     // CONSTRUCTOR:
@@ -39,13 +39,6 @@ public class ListOfExpense implements Writable {
 
     public int numOfExpenses() {
         return listOfExpense.size();
-    }
-
-    // ==============================
-    // SETTERS:
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     // ==============================
