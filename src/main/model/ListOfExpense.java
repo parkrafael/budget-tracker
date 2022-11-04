@@ -21,8 +21,8 @@ public class ListOfExpense implements Writable {
     // REQUIRES: N/A
     // MODIFIES: this
     // EFFECTS: instantiates a new ListOfExpense
-    public ListOfExpense(String name) {
-        this.name = name;
+    public ListOfExpense() {
+        this.name = "All Expenses";
         this.listOfExpense = new ArrayList<>();
     }
 
@@ -35,6 +35,10 @@ public class ListOfExpense implements Writable {
 
     public String getName() {
         return name;
+    }
+
+    public int numOfExpenses() {
+        return listOfExpense.size();
     }
 
     // ==============================

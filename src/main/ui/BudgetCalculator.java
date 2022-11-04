@@ -28,7 +28,7 @@ public class BudgetCalculator {
 
     // instantiating expense & listOfExpense:
     Expense expense;
-    ListOfExpense listOfExpense = new ListOfExpense("Rafael");
+    ListOfExpense listOfExpense = new ListOfExpense();
 
     // ==============================
     // CONSTRUCTOR:

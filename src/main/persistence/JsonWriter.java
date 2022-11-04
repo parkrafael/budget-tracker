@@ -26,7 +26,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of listOfExpense to file
     public void write(ListOfExpense listOfExpense) {
         JSONObject json = listOfExpense.toJson();
         saveToFile(json.toString(TAB));

@@ -33,7 +33,7 @@ public class ListOfExpenseTest {
         e4 = new Expense(10.00, "snacks", 15, 12, 2021);
         e5 = new Expense(10.00, "doordash", 15, 12, 2021);
 
-        listOfExpense = new ListOfExpense("Rafael");
+        listOfExpense = new ListOfExpense();
 
         listOfExpense.addExpense(e1);
         listOfExpense.addExpense(e2);

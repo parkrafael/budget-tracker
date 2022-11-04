@@ -1,19 +1,10 @@
 {
     "name": "Rafael",
-    "expenses": [
-        {
-            "amount": 30,
-            "month": 5,
-            "year": 2022,
-            "name": "flowers",
-            "day": 3
-        },
-        {
-            "amount": 30,
-            "month": 5,
-            "year": 1999,
-            "name": "plow",
-            "day": 5
-        }
-    ]
+    "expenses": [{
+        "amount": 100,
+        "month": 2,
+        "year": 2,
+        "name": "2",
+        "day": 2
+    }]
 }

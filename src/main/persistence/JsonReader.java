@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
-// represents a reader that reads workroom from JSON data stored in file
+// represents a reader that reads ListOfExpense from JSON data stored in file
 public class JsonReader {
     private final String source;
 
@@ -20,8 +20,8 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    // EFFECTS: reads ListOfExpense from file and returns it;
+    //          throws IOException if an error occurs reading data from file
     public ListOfExpense read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -39,13 +39,13 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses ListOfExpense from JSON object and returns it
     private ListOfExpense parseWorkRoom(JSONObject jsonObject) {
         // searches for key: "name" in workroom.json
         String name = jsonObject.getString("name");
 
         // creates a new listOfExpense
-        ListOfExpense listOfExpense = new ListOfExpense(name);
+        ListOfExpense listOfExpense = new ListOfExpense();
 
         // adds expenses in workroom.json to listOfExpense
         addExpenses(listOfExpense, jsonObject);
@@ -53,8 +53,8 @@ public class JsonReader {
         return listOfExpense;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: listOfExpense
+    // EFFECTS: parses Expenses from JSON object and adds them to ListOfExpense
     private void addExpenses(ListOfExpense listOfExpense, JSONObject jsonObject) {
         // searches for key: "expenses" in workroom.json
         JSONArray jsonArray = jsonObject.getJSONArray("expenses");
@@ -65,8 +65,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: listOfExpense
+    // EFFECTS: parses Expense from JSON object and adds it to ListOfExpense
     private void addExpense(ListOfExpense listOfExpense, JSONObject jsonObject) {
         // creates a new Expense from JSON object
 
