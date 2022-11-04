@@ -21,8 +21,8 @@ public class ListOfExpense implements Writable {
     // REQUIRES: N/A
     // MODIFIES: this
     // EFFECTS: instantiates a new ListOfExpense
-    public ListOfExpense() {
-        this.name = "";
+    public ListOfExpense(String name) {
+        this.name = name;
         this.listOfExpense = new ArrayList<>();
     }
 
@@ -31,6 +31,10 @@ public class ListOfExpense implements Writable {
 
     public ArrayList<Expense> getListOfExpense() {
         return listOfExpense;
+    }
+
+    public String getName() {
+        return name;
     }
 
     // ==============================
@@ -95,7 +99,7 @@ public class ListOfExpense implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
-        json.put("list of expenses", expenseToJson());
+        json.put("expenses", expenseToJson());
         return json;
     }
 

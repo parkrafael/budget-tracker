@@ -1,10 +1,19 @@
 {
-    "name": "",
-    "list of expenses": [{
-        "amount": 20,
-        "month": 2,
-        "year": 2022,
-        "name": "rafael",
-        "day": 2
-    }]
+    "name": "Rafael",
+    "expenses": [
+        {
+            "amount": 30,
+            "month": 5,
+            "year": 2022,
+            "name": "flowers",
+            "day": 3
+        },
+        {
+            "amount": 30,
+            "month": 5,
+            "year": 1999,
+            "name": "plow",
+            "day": 5
+        }
+    ]
 }

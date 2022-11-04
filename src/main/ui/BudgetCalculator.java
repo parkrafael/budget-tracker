@@ -2,18 +2,22 @@ package ui;
 
 import model.Expense;
 import model.ListOfExpense;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// TODO: class descriptor
 public class BudgetCalculator {
     // ==============================
     // FIELDS:
 
     // data persistence:
     private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
     private static final String JSON_STORE = "./data/workroom.json";
 
     // sum (for calculating total):
@@ -24,7 +28,7 @@ public class BudgetCalculator {
 
     // instantiating expense & listOfExpense:
     Expense expense;
-    ListOfExpense listOfExpense = new ListOfExpense();
+    ListOfExpense listOfExpense = new ListOfExpense("Rafael");
 
     // ==============================
     // CONSTRUCTOR:
@@ -32,7 +36,7 @@ public class BudgetCalculator {
     // EFFECTS: runs the budget calculator application
     public BudgetCalculator() {
         jsonWriter = new JsonWriter(JSON_STORE);
-//        jsonReader = new JsonReader(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runBudgetCalculator();
     }
 
@@ -64,7 +68,8 @@ public class BudgetCalculator {
                 break;
             case "d":
                 // TODO: add load option here
-                return;
+                loadWorkRoom();
+                resetScreen();
             case "e":
         }
     }
@@ -245,15 +250,15 @@ public class BudgetCalculator {
         }
     }
 
-//    // MODIFIES: this
-//    // EFFECTS: loads workroom from file
-//    private void loadWorkRoom() {
-//        try {
-//            expAllList = jsonReader.read();
-//            System.out.println("Loaded " + " from " + JSON_STORE);
-//        } catch (IOException e) {
-//            System.out.println("Unable to read from file: " + JSON_STORE);
-//        }
-//    }
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            listOfExpense = jsonReader.read();
+            System.out.println("Loaded " + listOfExpense.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 }
