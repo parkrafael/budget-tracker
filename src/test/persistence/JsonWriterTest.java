@@ -25,7 +25,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            ListOfExpense listOfExpense = new ListOfExpense();
+            ListOfExpense listOfExpense = new ListOfExpense("All Expenses");
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -37,7 +37,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterEmptyWorkroom() {
         try {
-            ListOfExpense listOfExpense = new ListOfExpense();
+            ListOfExpense listOfExpense = new ListOfExpense("All Expenses");
             JsonWriter writer = new JsonWriter("./data/testWriterEmpty.json");
 
             writer.open();
@@ -60,7 +60,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterGeneralWorkroom() {
         try {
-            ListOfExpense listOfExpense = new ListOfExpense();
+            ListOfExpense listOfExpense = new ListOfExpense("All Expenses");
             listOfExpense.addExpense(e1);
             listOfExpense.addExpense(e2);
 
