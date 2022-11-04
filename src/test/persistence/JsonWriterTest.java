@@ -1,71 +1,91 @@
-//package persistence;
-//
-//import model.Category;
-//import model.Thingy;
-//import model.WorkRoom;
-//import org.junit.jupiter.api.Test;
-//
-//import java.io.IOException;
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class JsonWriterTest extends JsonTest {
-//    //NOTE TO CPSC 210 STUDENTS: the strategy in designing tests for the JsonWriter is to
-//    //write data to a file and then use the reader to read it back in and check that we
-//    //read in a copy of what was written out.
-//
-//    @Test
-//    void testWriterInvalidFile() {
-//        try {
-//            WorkRoom wr = new WorkRoom("My work room");
-//            JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
-//            writer.open();
-//            fail("IOException was expected");
-//        } catch (IOException e) {
-//            // pass
-//        }
-//    }
-//
-//    @Test
-//    void testWriterEmptyWorkroom() {
-//        try {
-//            WorkRoom wr = new WorkRoom("My work room");
-//            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
-//            writer.open();
-//            writer.write(wr);
-//            writer.close();
-//
-//            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
-//            wr = reader.read();
-//            assertEquals("My work room", wr.getName());
-//            assertEquals(0, wr.numThingies());
-//        } catch (IOException e) {
-//            fail("Exception should not have been thrown");
-//        }
-//    }
-//
-//    @Test
-//    void testWriterGeneralWorkroom() {
-//        try {
-//            WorkRoom wr = new WorkRoom("My work room");
-//            wr.addThingy(new Thingy("saw", Category.METALWORK));
-//            wr.addThingy(new Thingy("needle", Category.STITCHING));
-//            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
-//            writer.open();
-//            writer.write(wr);
-//            writer.close();
-//
-//            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
-//            wr = reader.read();
-//            assertEquals("My work room", wr.getName());
-//            List<Thingy> thingies = wr.getThingies();
-//            assertEquals(2, thingies.size());
-//            checkThingy("saw", Category.METALWORK, thingies.get(0));
-//            checkThingy("needle", Category.STITCHING, thingies.get(1));
-//
-//        } catch (IOException e) {
-//            fail("Exception should not have been thrown");
-//        }
-//    }
-//}
+package persistence;
+
+
+import model.Expense;
+import model.ListOfExpense;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class JsonWriterTest extends JsonTest {
+
+    Expense e1;
+    Expense e2;
+
+    @BeforeEach
+    void setup() {
+        e1 = new Expense(10.00,"cheese", 3, 5, 2022);
+        e2 = new Expense(12.30,"bread", 15, 6, 1999);
+    }
+
+    @Test
+    void testWriterInvalidFile() {
+        try {
+            ListOfExpense listOfExpense = new ListOfExpense();
+            JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
+            writer.open();
+            fail("IOException was expected");
+        } catch (IOException e) {
+            // pass
+        }
+    }
+
+    @Test
+    void testWriterEmptyWorkroom() {
+        try {
+            ListOfExpense listOfExpense = new ListOfExpense();
+            JsonWriter writer = new JsonWriter("./data/testWriterEmpty.json");
+
+            writer.open();
+            writer.write(listOfExpense);
+            writer.close();
+
+            // ==============================
+
+            JsonReader reader = new JsonReader("./data/testWriterEmpty.json");
+            listOfExpense = reader.read();
+
+            assertEquals("All Expenses", listOfExpense.getName());
+            assertEquals(0, listOfExpense.numOfExpenses());
+
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+    @Test
+    void testWriterGeneralWorkroom() {
+        try {
+            ListOfExpense listOfExpense = new ListOfExpense();
+            listOfExpense.addExpense(e1);
+            listOfExpense.addExpense(e2);
+
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneral.json");
+
+            writer.open();
+            writer.write(listOfExpense);
+            writer.close();
+
+            // ==============================
+
+            JsonReader reader = new JsonReader("./data/testWriterGeneral.json");
+            listOfExpense = reader.read();
+
+            assertEquals("All Expenses", listOfExpense.getName());
+
+            ArrayList<Expense> expenses = listOfExpense.getListOfExpense();
+
+            assertEquals(2, expenses.size());
+
+            checkExpense(10.00,"cheese",3,5,2022,expenses.get(0));
+            checkExpense(12.30,"bread",15,6,1999,expenses.get(1));
+
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+}

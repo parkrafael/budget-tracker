@@ -1,0 +1,19 @@
+{
+    "name": "All Expenses",
+    "expenses": [
+        {
+            "amount": 10,
+            "month": 5,
+            "year": 2022,
+            "name": "cheese",
+            "day": 3
+        },
+        {
+            "amount": 12.3,
+            "month": 6,
+            "year": 1999,
+            "name": "bread",
+            "day": 15
+        }
+    ]
+}
