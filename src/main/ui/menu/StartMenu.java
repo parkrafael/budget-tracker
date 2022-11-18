@@ -37,8 +37,7 @@ public class StartMenu extends Menu {
     private JsonReader jsonReader;
 
     public StartMenu(ListOfExpense listofExpense) {
-        // creates a generic menu with ListOfExpense
-         super(listofExpense);
+        super(listofExpense);
 
         // String loginName = "Rafael";
 
@@ -122,8 +121,7 @@ public class StartMenu extends Menu {
             public void actionPerformed(ActionEvent e) {
                 YearViewMenu yearViewMenu = new YearViewMenu(listOfExpense);
             }
-        });
-        nameView.addActionListener(new ActionListener() {
+        }); nameView.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NameViewMenu nameViewMenu = new NameViewMenu(listOfExpense);
