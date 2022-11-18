@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 // Represents a writer that writes JSON representation of ListOfExpense to file
+// code derived from P2 example
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

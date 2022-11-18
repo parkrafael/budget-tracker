@@ -22,7 +22,7 @@ public class ListOfExpense implements Writable {
     // MODIFIES: this
     // EFFECTS: instantiates a new ListOfExpense
     public ListOfExpense(String name) {
-        this.name = "All Expenses";
+        this.name = name;
         this.listOfExpense = new ArrayList<>();
     }
 

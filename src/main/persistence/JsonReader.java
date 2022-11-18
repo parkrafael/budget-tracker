@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 import org.json.*;
 
 // represents a reader that reads ListOfExpense from JSON data stored in file
+// code derived from P2 example
 public class JsonReader {
     private final String source;
 

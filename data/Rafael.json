@@ -1,26 +1,4 @@
 {
-    "name": "All Expenses",
-    "expenses": [
-        {
-            "amount": 30.1,
-            "month": 5,
-            "year": 2002,
-            "name": "Liquor",
-            "day": 3
-        },
-        {
-            "amount": 5000,
-            "month": 10,
-            "year": 2002,
-            "name": "PC",
-            "day": 3
-        },
-        {
-            "amount": 41.12,
-            "month": 10,
-            "year": 2002,
-            "name": "Mattress",
-            "day": 3
-        }
-    ]
+    "name": "RAFAEL",
+    "expenses": []
 }
