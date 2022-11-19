@@ -1,10 +1,18 @@
 package ui;
 
 import model.ListOfExpense;
-import ui.menu.StartMenu;
+import ui.menu.UserLoginMenu;
+
+import java.io.IOException;
 
 public class Main {
+
     public static void main(String[] args) {
-        new StartMenu(new ListOfExpense("ALL EXPENSES"));
+        try {
+            UserLoginMenu userLoginMenu = new UserLoginMenu(new ListOfExpense(""));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 }

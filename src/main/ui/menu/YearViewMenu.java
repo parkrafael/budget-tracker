@@ -5,20 +5,16 @@ import model.ListOfExpense;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-// TODO: change class descriptor
-// represents application's view habitat menu window
+// represents application's view expenses on specific year
 public class YearViewMenu extends Menu {
-
-    private ArrayList<JLabel> expenseList;
-
     // labels
     private JLabel titleLabel;
     private JLabel yearLabel;
+    private JLabel totalAmount;
 
     // buttons
     private JButton enter;
@@ -39,8 +35,6 @@ public class YearViewMenu extends Menu {
         initializeListeners();
 
         addToPanel();
-        panel.revalidate();
-        panel.repaint();
     }
 
     // MODIFIES: this
@@ -49,6 +43,7 @@ public class YearViewMenu extends Menu {
     public void initializeLabels() {
         titleLabel = new JLabel("View By Year");
         yearLabel = new JLabel("Year:");
+        totalAmount = new JLabel("Total Amount: 0.00");
 
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
@@ -71,12 +66,18 @@ public class YearViewMenu extends Menu {
                         tableModel.addRow(new Object[]{exp.getName(), Double.toString(exp.getAmount())});
                     }
                 }
+
+                Double sum = 0.00;
+                for (int d = 0; d < tableModel.getRowCount(); d++) {
+                    sum = sum + Double.parseDouble(tableModel.getValueAt(d, 1).toString());
+                }
+                totalAmount.setText("Total Amount: " + Double.toString(sum));
             }
         });
     }
 
     // MODIFIES: this
-    // EFFECTS: adds buttons that control the actions to viewing the habitat
+    // EFFECTS: initializes all buttons & text fields used in menu
     private void initializeButtons() {
         yearInput = new JTextField(20);
         enter = new JButton("Enter");
@@ -96,14 +97,14 @@ public class YearViewMenu extends Menu {
         panel.add(new JScrollPane(table));
 
         panel.add(enter);
+
+        panel.add(totalAmount);
     }
 
     // MODIFIES: Menu (super)
     // EFFECTS: initializes the JFrame components
     private void initializeApp() {
         frame.setTitle("Budget Tracker: View by Year");
-        panel.setLayout(new GridLayout(8, 1, 20, 10));
-        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     }
 
 }

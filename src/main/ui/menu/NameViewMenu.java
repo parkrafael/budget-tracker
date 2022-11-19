@@ -5,20 +5,16 @@ import model.ListOfExpense;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-// TODO: change class descriptor
-// represents application's view habitat menu window
+// represents application's view expenses for specific name
 public class NameViewMenu extends Menu {
-
-    private ArrayList<JLabel> expenseList;
-
     // labels
     private JLabel titleLabel;
     private JLabel nameLabel;
+    private JLabel totalAmount;
 
     // buttons
     private JButton enter;
@@ -33,7 +29,8 @@ public class NameViewMenu extends Menu {
     public NameViewMenu(ListOfExpense listOfExpense) {
         super(listOfExpense);
 
-        initializeApp();
+        frame.setTitle("Budget Tracker: View by Name");
+
         initializeLabels();
         initializeButtons();
         initializeListeners();
@@ -44,11 +41,12 @@ public class NameViewMenu extends Menu {
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes and adds text to all the present labels in this menu
+    // EFFECTS: initializes and adds text to all the present labels in this menu
     @Override
     public void initializeLabels() {
         titleLabel = new JLabel("View By Name");
         nameLabel = new JLabel("Name: ");
+        totalAmount = new JLabel("Total Amount: 0.00");
 
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
@@ -57,7 +55,7 @@ public class NameViewMenu extends Menu {
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes all action listeners
+    // EFFECTS: initializes all action listeners
     @Override
     public void initializeListeners() {
         enter.addActionListener(new ActionListener() {
@@ -71,12 +69,18 @@ public class NameViewMenu extends Menu {
                         tableModel.addRow(new Object[]{exp.getName(), Double.toString(exp.getAmount())});
                     }
                 }
+
+                Double sum = 0.00;
+                for (int d = 0; d < tableModel.getRowCount(); d++) {
+                    sum = sum + Double.parseDouble(tableModel.getValueAt(d, 1).toString());
+                }
+                totalAmount.setText("Total Amount: " + Double.toString(sum));
             }
         });
     }
 
     // MODIFIES: this
-    // EFFECTS: adds buttons that control the actions to viewing the habitat
+    // EFFECTS: initializes all buttons & text fields used in menu
     private void initializeButtons() {
         nameInput = new JTextField(20);
         enter = new JButton("Enter");
@@ -96,14 +100,8 @@ public class NameViewMenu extends Menu {
         panel.add(new JScrollPane(table));
 
         panel.add(enter);
-    }
 
-    // MODIFIES: Menu (super)
-    // EFFECTS: initializes the JFrame components
-    private void initializeApp() {
-        frame.setTitle("Budget Tracker: View by Name");
-        panel.setLayout(new GridLayout(8, 1, 20, 10));
-        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        panel.add(totalAmount);
     }
 
 }

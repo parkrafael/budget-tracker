@@ -1,7 +1,7 @@
 package model;
 
 import org.json.JSONObject;
-import persistence.Writable;
+import ui.persistence.Writable;
 
 // Represents a Expense, having a amount, name, and date (day/month/year)
 public class Expense implements Writable {

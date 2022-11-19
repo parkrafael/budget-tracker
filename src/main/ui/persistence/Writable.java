@@ -1,4 +1,4 @@
-package persistence;
+package ui.persistence;
 
 import org.json.JSONObject;
 

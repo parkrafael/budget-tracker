@@ -5,6 +5,8 @@ import model.Expense;
 import model.ListOfExpense;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ui.persistence.JsonReader;
+import ui.persistence.JsonWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package persistence;
+package ui.persistence;
 
 import model.Expense;
 import model.ListOfExpense;

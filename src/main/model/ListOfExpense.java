@@ -2,7 +2,7 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.Writable;
+import ui.persistence.Writable;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class ListOfExpense implements Writable {
 
     // constructor:
     private final ArrayList<Expense> listOfExpense;
-    private final String name;
+    private String name;
 
     // ==============================
     // CONSTRUCTOR:
@@ -94,6 +94,10 @@ public class ListOfExpense implements Writable {
             }
         }
         return expenseAtYear;
+    }
+
+    public void changeName(String name) {
+        this.name = name;
     }
 
     // ==============================

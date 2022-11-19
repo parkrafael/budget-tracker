@@ -2,8 +2,8 @@ package ui.menu;
 
 import model.ListOfExpense;
 
-import persistence.JsonReader;
-import persistence.JsonWriter;
+import ui.persistence.JsonReader;
+import ui.persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,17 +11,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Year;
 
 // represents application's start menu window
 public class StartMenu extends Menu {
 
-    private String file = "./data/Max.json";
-
     // labels
     private JLabel titleLabel;
-    private JLabel saveMessage = new JLabel("Saved to ");
+    private JLabel saveMessage = new JLabel("Saved");
     private JLabel loadMessage = new JLabel("Loaded");
+    private JLabel saveErrorMessage = new JLabel("Error Saving");
+    private JLabel loadErrorMessage = new JLabel("Error Loading");
 
     //buttons
     private JButton name;
@@ -36,16 +35,15 @@ public class StartMenu extends Menu {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    public StartMenu(ListOfExpense listofExpense) {
+    public StartMenu(ListOfExpense listofExpense, String name) {
         super(listofExpense);
 
-        // String loginName = "Rafael";
+        String directory = "./data/" + name + ".json";
 
-        // instantiates jsonWriter + jsonReader
-        // String file = "./data/" + loginName + ".json";
+        jsonWriter = new JsonWriter(directory);
+        jsonReader = new JsonReader(directory);
 
-        jsonWriter = new JsonWriter(file);
-        jsonReader = new JsonReader(file);
+        loadFunction();
 
         // initialization
         initializeApp();
@@ -61,8 +59,6 @@ public class StartMenu extends Menu {
 
         // adds all buttons to panel
         addToPanel();
-        panel.revalidate();
-        panel.repaint();
     }
 
     // MODIFIES: Menu (super)
@@ -109,14 +105,12 @@ public class StartMenu extends Menu {
             public void actionPerformed(ActionEvent e) {
                 DayViewMenu dayViewMenu = new DayViewMenu(listOfExpense);
             }
-        });
-        monthView.addActionListener(new ActionListener() {
+        }); monthView.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MonthViewMenu monthViewMenu = new MonthViewMenu(listOfExpense);
             }
-        });
-        yearView.addActionListener(new ActionListener() {
+        }); yearView.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 YearViewMenu yearViewMenu = new YearViewMenu(listOfExpense);
@@ -146,6 +140,7 @@ public class StartMenu extends Menu {
                 loadFunction();
             }
         });
+
     }
 
     // MODIFIES: this
@@ -162,21 +157,11 @@ public class StartMenu extends Menu {
             listOfExpense.toJson();
 
             // success message
-
-            panel.remove(saveMessage);
-            panel.add(saveMessage);
-
-            panel.revalidate();
-            panel.repaint();
+//            panel.remove(saveMessage);
+//            panel.add(saveMessage);
 
         } catch (FileNotFoundException e) {
             // error message
-            panel.add(loadMessage);
-            panel.add(loadMessage);
-
-            panel.revalidate();
-            panel.repaint();
-
         }
     }
 
@@ -189,20 +174,12 @@ public class StartMenu extends Menu {
             // instantiates jsonReader
             listOfExpense = jsonReader.read();
 
-            // success message
-            panel.add(saveMessage);
-            panel.remove(saveMessage);
-
-            panel.revalidate();
-            panel.repaint();
+            // success
+//            panel.remove(loadMessage);
+//            panel.add(loadMessage);
 
         } catch (IOException e) {
             // error message
-            panel.add(loadMessage);
-            panel.remove(loadMessage);
-
-            panel.revalidate();
-            panel.repaint();
         }
     }
 
@@ -215,8 +192,8 @@ public class StartMenu extends Menu {
         monthView = new JButton("View By Month");
         yearView = new JButton("View By Year");
         nameView = new JButton("View By Name");
-        load = new JButton("Load");
         save = new JButton("Save");
+        load = new JButton("Load");
     }
 
     // MODIFIES: Menu (super)

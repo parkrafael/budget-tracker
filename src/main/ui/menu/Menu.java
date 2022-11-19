@@ -11,8 +11,8 @@ public abstract class Menu extends JFrame {
     protected ListOfExpense listOfExpense;
     protected Expense expense;
 
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 900;
 
     protected JFrame frame;
     protected JPanel panel;
@@ -26,16 +26,13 @@ public abstract class Menu extends JFrame {
         frame = new JFrame();
         panel = new JPanel();
 
+        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
         // instantiates frame
         frame.setSize(WIDTH, HEIGHT);
-        frame.setTitle("Budget Tracker");
         frame.setVisible(true);
-        frame.add(panel, BorderLayout.CENTER);
-
-        // instantiates panel
-        panel.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        panel.setLayout(new GridLayout(5, 1, 8, 10));
-        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        frame.add(panel);
     }
 
     // EFFECTS: generates empty label to act as an empty space

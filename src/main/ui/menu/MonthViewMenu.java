@@ -5,21 +5,17 @@ import model.ListOfExpense;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-// TODO: change class descriptor
-// represents application's view habitat menu window
+// represents application's view expenses on specific month
 public class MonthViewMenu extends Menu {
-
-    private ArrayList<JLabel> expenseList;
-
     // labels
     private JLabel titleLabel;
     private JLabel monthLabel;
     private JLabel yearLabel;
+    private JLabel totalAmount;
 
     // buttons
     private JButton enter;
@@ -35,7 +31,8 @@ public class MonthViewMenu extends Menu {
     public MonthViewMenu(ListOfExpense listOfExpense) {
         super(listOfExpense);
 
-        initializeApp();
+        frame.setTitle("Budget Tracker: View by Month");
+
         initializeLabels();
         initializeButtons();
         initializeListeners();
@@ -46,12 +43,13 @@ public class MonthViewMenu extends Menu {
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes and adds text to all the present labels in this menu
+    // EFFECTS: initializes and adds text to all the present labels in this menu
     @Override
     public void initializeLabels() {
         titleLabel = new JLabel("View By Month");
         monthLabel = new JLabel("Month:");
         yearLabel = new JLabel("Year:");
+        totalAmount = new JLabel("Total Amount: 0.00");
 
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
@@ -60,7 +58,7 @@ public class MonthViewMenu extends Menu {
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes all action listeners
+    // EFFECTS: initializes all action listeners
     @Override
     public void initializeListeners() {
         enter.addActionListener(new ActionListener() {
@@ -75,12 +73,20 @@ public class MonthViewMenu extends Menu {
                         tableModel.addRow(new Object[]{exp.getName(), Double.toString(exp.getAmount())});
                     }
                 }
+
+                Double sum = 0.00;
+
+                for (int d = 0; d < tableModel.getRowCount(); d++) {
+                    sum = sum + Double.parseDouble(tableModel.getValueAt(d, 1).toString());
+                }
+
+                totalAmount.setText("Total Amount: " + Double.toString(sum));
             }
         });
     }
 
     // MODIFIES: this
-    // EFFECTS: adds buttons that control the actions to viewing the habitat
+    // EFFECTS: initializes all buttons & text fields used in menu
     private void initializeButtons() {
         monthInput = new JTextField(20);
         yearInput = new JTextField(20);
@@ -104,14 +110,8 @@ public class MonthViewMenu extends Menu {
         panel.add(new JScrollPane(table));
 
         panel.add(enter);
-    }
 
-    // MODIFIES: Menu (super)
-    // EFFECTS: initializes the JFrame components
-    private void initializeApp() {
-        frame.setTitle("Budget Tracker: View by Month");
-        panel.setLayout(new GridLayout(8, 2, 20, 10));
-        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        panel.add(totalAmount);
     }
 
 }

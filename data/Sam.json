@@ -1,0 +1,19 @@
+{
+    "name": "Sam",
+    "expenses": [
+        {
+            "amount": 50,
+            "month": 11,
+            "year": 2022,
+            "name": "Camera",
+            "day": 18
+        },
+        {
+            "amount": 70,
+            "month": 11,
+            "year": 2022,
+            "name": "Film",
+            "day": 18
+        }
+    ]
+}

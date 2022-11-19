@@ -8,10 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// TODO: change class description
-// represents application's name zoo menu window
+// applications menu to add expense
 public class AddExpenseMenu extends Menu {
-
     // labels
     private JLabel nameLabel;
     private JLabel amountLabel;
@@ -19,21 +17,23 @@ public class AddExpenseMenu extends Menu {
     private JLabel monthLabel;
     private JLabel yearLabel;
 
+    // buttons
     private JButton enter;
 
+    // text fields
     private JTextField nameInput;
     private JTextField amountInput;
     private JTextField dayInput;
     private JTextField monthInput;
     private JTextField yearInput;
 
-
     public AddExpenseMenu(ListOfExpense listOfExpense) {
         super(listOfExpense);
 
-        initializeApp();
+        frame.setTitle("Budget Tracker: Add Expense");
+
         initializeLabels();
-        initializeButtons();
+        initializeTextAndButtons();
         initializeListeners();
 
         addToPanel();
@@ -42,18 +42,18 @@ public class AddExpenseMenu extends Menu {
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes and adds text to all the present labels in this menu
+    // EFFECTS: initializes and adds text to all the present labels in this menu
     @Override
     public void initializeLabels() {
-        nameLabel = new JLabel("Enter name of purchase");
-        amountLabel = new JLabel("Enter amount");
-        dayLabel = new JLabel("Enter day of purchase");
-        monthLabel = new JLabel("Enter month of purchase");
-        yearLabel = new JLabel("Enter year of purchase");
+        nameLabel = new JLabel("Name: ");
+        amountLabel = new JLabel("Amount:");
+        dayLabel = new JLabel("Day of Purchase: ");
+        monthLabel = new JLabel("Month of Purchase: ");
+        yearLabel = new JLabel("Year of Purchase: ");
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes all action listeners
+    // EFFECTS: initializes all action listeners
     @Override
     public void initializeListeners() {
         enter.addActionListener(new ActionListener() {
@@ -65,63 +65,50 @@ public class AddExpenseMenu extends Menu {
                         Integer.parseInt(dayInput.getText()),
                         Integer.parseInt(monthInput.getText()),
                         Integer.parseInt(yearInput.getText()));
-
-                listOfExpense.addExpense(expense1);
+                        listOfExpense.addExpense(expense1);
             }
         });
     }
 
     // MODIFIES: this
-    // EFFECTS: adds buttons that control the actions naming the zoo
-    private void initializeButtons() {
-        nameInput = new JTextField(20);
-        amountInput = new JTextField(20);
-        dayInput = new JTextField(20);
-        monthInput = new JTextField(20);
-        yearInput = new JTextField(20);
+    // EFFECTS: initializes all buttons used in menu
+    private void initializeTextAndButtons() {
+        // text fields
+        nameInput = new JTextField(10);
+        amountInput = new JTextField(10);
+        dayInput = new JTextField(10);
+        monthInput = new JTextField(10);
+        yearInput = new JTextField(10);
 
-
-
-
-
-
+        // buttons
         enter = new JButton("Enter");
-
     }
 
     // MODIFIES: Menu (super)
     // EFFECTS: adds all necessary elements to the panel
     @Override
     public void addToPanel() {
-        // Expense name
+        // expense name
         panel.add(nameLabel);
         panel.add(nameInput);
 
-        // Expense amount
+        // expense amount
         panel.add(amountLabel);
         panel.add(amountInput);
 
-        // Expense day
+        // expense day
         panel.add(dayLabel);
         panel.add(dayInput);
 
-        // Expense month
+        // expense month
         panel.add(monthLabel);
         panel.add(monthInput);
 
-        // Expense year
+        // expense year
         panel.add(yearLabel);
         panel.add(yearInput);
 
         panel.add(enter);
-    }
-
-    // MODIFIES: Menu (super)
-    // EFFECTS: initializes the JFrame components
-    private void initializeApp() {
-        frame.setTitle("Budget Tracker: Add Expense");
-        panel.setLayout(new GridLayout(8, 2, 20, 10));
-        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     }
 
 }

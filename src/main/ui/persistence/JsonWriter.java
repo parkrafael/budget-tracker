@@ -1,4 +1,4 @@
-package persistence;
+package ui.persistence;
 
 import model.ListOfExpense;
 import org.json.JSONObject;

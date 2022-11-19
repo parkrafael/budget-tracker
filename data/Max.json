@@ -1,19 +1,4 @@
 {
-    "name": "RAFAEL",
-    "expenses": [
-        {
-            "amount": 50,
-            "month": 11,
-            "year": 2022,
-            "name": "poop",
-            "day": 17
-        },
-        {
-            "amount": 75.12,
-            "month": 11,
-            "year": 2022,
-            "name": "Controller",
-            "day": 10
-        }
-    ]
+    "name": "Max",
+    "expenses": []
 }
