@@ -14,7 +14,6 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//       new DayViewMenu(new ListOfExpense(""));
     }
 
 }

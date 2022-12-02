@@ -44,10 +44,10 @@ public class StartMenu extends Menu {
     // CONSTRUCTOR:
 
     // EFFECTS: creates a start view menu
-    public StartMenu(ListOfExpense listofExpense, String addExpense) {
+    public StartMenu(ListOfExpense listofExpense, String name) {
         super(listofExpense);
 
-        String directory = "./data/" + addExpense + ".json";
+        String directory = "./data/" + name + ".json";
 
         jsonWriter = new JsonWriter(directory);
         jsonReader = new JsonReader(directory);

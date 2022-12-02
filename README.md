@@ -59,3 +59,10 @@ Thu Dec 01 20:39:50 PST 2022
 Loaded Gabie's List of Expenses.
 
 Phase 4: Task 3
+
+- Make the application more robust by handling more exceptions instead of just relying on REQUIRES statements
+  (ie. getExpenseAtDay, getExpenseAtMonth, getExpenseAtYear)
+- Improve the cohesion of the application by creating a new class named Logger to store all our logEvent functions
+- Improve the coupling in the BudgetCalculator class by abstracting out similar print statements in the console user 
+  interface and making them methods to create uniformly formatted output
+

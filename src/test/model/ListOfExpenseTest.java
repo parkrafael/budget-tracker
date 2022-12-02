@@ -57,6 +57,12 @@ public class ListOfExpenseTest {
     }
 
     @Test
+    public void changeNameTest() {
+        listOfExpense.changeName("Soleia");
+        assertEquals(listOfExpense.getName(), "Soleia");
+    }
+
+    @Test
     public void getExpenseAtDayTest() {
         // two items on the day
         ArrayList<Expense> testAtDay1 = new ArrayList<>();

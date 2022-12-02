@@ -14,7 +14,6 @@ public abstract class Menu extends JFrame {
     // FIELDS:
 
     protected ListOfExpense listOfExpense;
-    protected Expense expense;
 
     public static final int WIDTH = 530;
     public static final int HEIGHT = 650;
