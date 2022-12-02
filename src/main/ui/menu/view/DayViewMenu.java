@@ -1,15 +1,20 @@
-package ui.menu;
+package ui.menu.view;
 
 import model.Expense;
 import model.ListOfExpense;
+import ui.menu.Menu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // represents application's view expenses on specific day
 public class DayViewMenu extends Menu {
+    // ==============================
+    // FIELDS:
+
     // labels
     private JLabel titleLabel;
     private JLabel dayLabel;
@@ -29,6 +34,10 @@ public class DayViewMenu extends Menu {
     private DefaultTableModel tableModel;
     private JTable table;
 
+    // ==============================
+    // CONSTRUCTOR:
+
+    // EFFECTS: creates a day view menu
     public DayViewMenu(ListOfExpense listOfExpense) {
         super(listOfExpense);
 
@@ -43,19 +52,21 @@ public class DayViewMenu extends Menu {
         panel.repaint();
     }
 
+    // ==============================
+    // METHODS:
+
     // MODIFIES: this
     // EFFECTS: initializes & adds text to all the present labels in this menu
     //          + initializes the table & adds columns
     @Override
     public void initializeLabels() {
-        // labels
         titleLabel = new JLabel("View By Day");
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 14f));
         dayLabel = new JLabel("Day:");
         monthLabel = new JLabel("Month:");
         yearLabel = new JLabel("Year:");
         totalAmount = new JLabel("Total Amount: 0.00");
 
-        // table
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
         tableModel.addColumn("Name");
@@ -87,7 +98,8 @@ public class DayViewMenu extends Menu {
                     sum = sum + Double.parseDouble(tableModel.getValueAt(d, 1).toString());
                 }
 
-                totalAmount.setText("Total Amount" + Double.toString(sum));
+                totalAmount.setText("Total Amount: " + Double.toString(sum));
+                listOfExpense.logDayViewEvent();
             }
         });
     }
@@ -95,9 +107,9 @@ public class DayViewMenu extends Menu {
     // MODIFIES: this
     // EFFECTS: initializes all buttons used in menu
     private void initializeButtons() {
-        dayInput = new JTextField(20);
-        monthInput = new JTextField(20);
-        yearInput = new JTextField(20);
+        dayInput = new JTextField(10);
+        monthInput = new JTextField(10);
+        yearInput = new JTextField(10);
         enter = new JButton("Enter");
     }
 
@@ -105,24 +117,12 @@ public class DayViewMenu extends Menu {
     // EFFECTS: adds all the necessary components to the panel
     @Override
     public void addToPanel() {
-        panel.add(titleLabel);
-
-        panel.add(createSpaceLabel());
-
-        panel.add(dayLabel);
-        panel.add(dayInput);
-
-        panel.add(monthLabel);
-        panel.add(monthInput);
-
-        panel.add(yearLabel);
-        panel.add(yearInput);
-
-        panel.add(new JScrollPane(table));
-
-        panel.add(enter);
-
-        panel.add(totalAmount);
+        addLabel(titleLabel, 0, panel);
+        addLabelandTextField(dayLabel,dayInput,1,panel);
+        addLabelandTextField(monthLabel,monthInput,2,panel);
+        addLabelandTextField(yearLabel,yearInput,3,panel);
+        addButton(enter, 4, panel);
+        addTable(new JScrollPane(table), 5, panel);
+        addLabel(totalAmount, 6, panel);
     }
-
 }

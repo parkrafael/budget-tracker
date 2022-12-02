@@ -1,16 +1,21 @@
-package ui.menu;
+package ui.menu.view;
 
 import model.Expense;
 import model.ListOfExpense;
+import ui.menu.Menu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 // represents application's view expenses on specific month
 public class MonthViewMenu extends Menu {
+    // ==============================
+    // FIELDS:
+
     // labels
     private JLabel titleLabel;
     private JLabel monthLabel;
@@ -28,6 +33,10 @@ public class MonthViewMenu extends Menu {
     private DefaultTableModel tableModel;
     private JTable table;
 
+    // ==============================
+    // CONSTRUCTOR:
+
+    // EFFECTS: creates a month view menu
     public MonthViewMenu(ListOfExpense listOfExpense) {
         super(listOfExpense);
 
@@ -42,11 +51,15 @@ public class MonthViewMenu extends Menu {
         panel.repaint();
     }
 
+    // ==============================
+    // METHODS:
+
     // MODIFIES: this
     // EFFECTS: initializes and adds text to all the present labels in this menu
     @Override
     public void initializeLabels() {
         titleLabel = new JLabel("View By Month");
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 14f));
         monthLabel = new JLabel("Month:");
         yearLabel = new JLabel("Year:");
         totalAmount = new JLabel("Total Amount: 0.00");
@@ -81,6 +94,7 @@ public class MonthViewMenu extends Menu {
                 }
 
                 totalAmount.setText("Total Amount: " + Double.toString(sum));
+                listOfExpense.logMonthViewEvent();
             }
         });
     }
@@ -97,21 +111,12 @@ public class MonthViewMenu extends Menu {
     // EFFECTS: adds all the necessary components to the panel
     @Override
     public void addToPanel() {
-        panel.add(titleLabel);
-
-        panel.add(createSpaceLabel());
-
-        panel.add(monthLabel);
-        panel.add(monthInput);
-
-        panel.add(yearLabel);
-        panel.add(yearInput);
-
-        panel.add(new JScrollPane(table));
-
-        panel.add(enter);
-
-        panel.add(totalAmount);
+        addLabel(titleLabel, 0, panel);
+        addLabelandTextField(monthLabel,monthInput,1,panel);
+        addLabelandTextField(yearLabel,yearInput,2,panel);
+        addButton(enter,3,panel);
+        addTable(new JScrollPane(table),5,panel);
+        addLabel(totalAmount,6,panel);
     }
 
 }

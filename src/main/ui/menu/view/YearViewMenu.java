@@ -1,51 +1,62 @@
-package ui.menu;
+package ui.menu.view;
 
 import model.Expense;
 import model.ListOfExpense;
+import ui.menu.Menu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-// represents application's view expenses for specific name
-public class NameViewMenu extends Menu {
+// represents application's view expenses on specific year
+public class YearViewMenu extends Menu {
+    // ==============================
+    // FIELDS:
+
     // labels
     private JLabel titleLabel;
-    private JLabel nameLabel;
+    private JLabel yearLabel;
     private JLabel totalAmount;
 
     // buttons
     private JButton enter;
 
     // text field
-    private JTextField nameInput;
+    private JTextField yearInput;
 
     // table
     private DefaultTableModel tableModel;
     private JTable table;
 
-    public NameViewMenu(ListOfExpense listOfExpense) {
+    // ==============================
+    // CONSTRUCTOR:
+
+    // EFFECTS: creates a year view menu
+    public YearViewMenu(ListOfExpense listOfExpense) {
         super(listOfExpense);
 
-        frame.setTitle("Budget Tracker: View by Name");
+        frame.setTitle("Budget Tracker: View by Year");
 
         initializeLabels();
         initializeButtons();
         initializeListeners();
 
         addToPanel();
-        panel.revalidate();
-        panel.repaint();
     }
 
+    // ==============================
+    // METHODS:
+
     // MODIFIES: this
-    // EFFECTS: initializes and adds text to all the present labels in this menu
+    // EFFECTS: Initializes and adds text to all the present labels in this menu
     @Override
     public void initializeLabels() {
-        titleLabel = new JLabel("View By Name");
-        nameLabel = new JLabel("Name: ");
+        titleLabel = new JLabel("View By Year");
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 14f));
+        yearLabel = new JLabel("Year:");
         totalAmount = new JLabel("Total Amount: 0.00");
 
         tableModel = new DefaultTableModel();
@@ -55,7 +66,7 @@ public class NameViewMenu extends Menu {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes all action listeners
+    // EFFECTS: Initializes all action listeners
     @Override
     public void initializeListeners() {
         enter.addActionListener(new ActionListener() {
@@ -65,7 +76,7 @@ public class NameViewMenu extends Menu {
                 tableModel.setRowCount(0);
 
                 for (Expense exp : listOfExpense.getListOfExpense()) {
-                    if (nameInput.getText().equals(exp.getName())) {
+                    if (yearInput.getText().equals(Integer.toString(exp.getYear()))) {
                         tableModel.addRow(new Object[]{exp.getName(), Double.toString(exp.getAmount())});
                     }
                 }
@@ -75,6 +86,7 @@ public class NameViewMenu extends Menu {
                     sum = sum + Double.parseDouble(tableModel.getValueAt(d, 1).toString());
                 }
                 totalAmount.setText("Total Amount: " + Double.toString(sum));
+                listOfExpense.logYearViewEvent();
             }
         });
     }
@@ -82,7 +94,7 @@ public class NameViewMenu extends Menu {
     // MODIFIES: this
     // EFFECTS: initializes all buttons & text fields used in menu
     private void initializeButtons() {
-        nameInput = new JTextField(20);
+        yearInput = new JTextField(20);
         enter = new JButton("Enter");
     }
 
@@ -90,18 +102,11 @@ public class NameViewMenu extends Menu {
     // EFFECTS: adds all the necessary components to the panel
     @Override
     public void addToPanel() {
-        panel.add(titleLabel);
-
-        panel.add(createSpaceLabel());
-
-        panel.add(nameLabel);
-        panel.add(nameInput);
-
-        panel.add(new JScrollPane(table));
-
-        panel.add(enter);
-
-        panel.add(totalAmount);
+        addLabel(titleLabel, 0, panel);
+        addLabelandTextField(yearLabel,yearInput,1,panel);
+        addButton(enter, 2, panel);
+        addTable(new JScrollPane(table), 5, panel);
+        addLabel(totalAmount, 6, panel);
     }
 
 }
