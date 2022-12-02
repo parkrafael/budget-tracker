@@ -5,6 +5,7 @@ import model.ListOfExpense;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -16,13 +17,14 @@ import java.nio.file.Paths;
 
 // represents application's log in menu
 public class UserLoginMenu extends Menu {
+    // ==============================
+    // FIELDS:
 
     // data persistence
     private String directory;
 
     // labels
     private JLabel userLabel;
-    private JLabel success;
 
     // text fields
     private JTextField userText;
@@ -30,12 +32,15 @@ public class UserLoginMenu extends Menu {
     // buttons
     private JButton button;
 
+    // ==============================
+    // CONSTRUCTOR:
+
     public UserLoginMenu(ListOfExpense listOfExpense) throws IOException {
         super(listOfExpense);
 
         BufferedImage myPicture = ImageIO.read(new File("./data/title.jpeg"));
         JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-        panel.add(picLabel);
+        addLabel(picLabel,0,panel);
 
         initializeApp();
         initializeLabels();
@@ -47,18 +52,15 @@ public class UserLoginMenu extends Menu {
         panel.repaint();
     }
 
+    // ==============================
+    // METHODS:
+
     // MODIFIES: this
     // EFFECTS: initializes and adds text to all the present labels in this menu
     @Override
     public void initializeLabels() {
-        userLabel = new JLabel("User");
-        userLabel.setBounds(10, 20, 80, 25);
-
-        userText = new JTextField(20);
-        userText.setBounds(100, 20, 165, 25);
-
-        success = new JLabel("");
-        success.setBounds(10,110,300,25);
+        userLabel = new JLabel("User: ");
+        userText = new JTextField();
     }
 
     // MODIFIES: this
@@ -74,15 +76,33 @@ public class UserLoginMenu extends Menu {
 
                 if (Files.exists(path)) {
                     listOfExpense.changeName(name);
+                    frame.dispose();
                     new StartMenu(listOfExpense, name);
-
                 } else {
                     directory = "./data/" + name + ".json";
                     listOfExpense.changeName(name);
+                    listOfExpense.logCreateEvent();
                     new StartMenu(listOfExpense, name);
+                    frame.dispose();
+                    createFrame("That user does not exist. Created new user, " + name + ".");
                 }
             }
         });
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates a new frame that indicates whether it has been saved/loaded
+    private void createFrame(String message) {
+        JFrame frame1 = new JFrame();
+        JPanel panel1 = new JPanel();
+        JLabel label1 = new JLabel(message);
+
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        label1.setVerticalAlignment(SwingConstants.CENTER);
+        frame1.add(panel1);
+        frame1.setSize(366, 63);
+        frame1.setVisible(true);
+        panel1.add(label1);
     }
 
     // MODIFIES: this
@@ -96,11 +116,8 @@ public class UserLoginMenu extends Menu {
     // EFFECTS: adds all the necessary components to the panel
     @Override
     public void addToPanel() {
-        panel.add(userLabel);
-        userLabel.setBounds(10, 20, 80, 25);
-        panel.add(userText);
-        userText.setBounds(100, 20, 165, 25);
-        panel.add(button);
+        addLabelandTextField(userLabel,userText,1,panel);
+        addButton(button,2, panel);
     }
 
     // MODIFIES: Menu (super)

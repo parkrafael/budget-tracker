@@ -124,4 +124,62 @@ public class ListOfExpense implements Writable {
         return jsonArray;
     }
 
+    // ==============================
+    // EVENT LOG:
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for adding Expense to ListOfExpense
+    public void logAddExpenseEvent() {
+        EventLog.getInstance().logEvent(new Event("Added Expense to " + name + "'s" + " List of Expenses"));
+    }
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for creating ListOfExpense to EventLog
+    public void logCreateEvent() {
+        EventLog.getInstance().logEvent(new Event("Created a new List of Expenses, name: " + name));
+    }
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for saving ListOfExpense to EventLog
+    public void logSaveEvent() {
+        EventLog.getInstance().logEvent(new Event("Saved " + name + "'s " + "List of Expenses."));
+    }
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for loading ListOfExpense to EventLog
+    public void logLoadEvent() {
+        EventLog.getInstance().logEvent(new Event("Loaded " + name + "'s " + "List of Expenses."));
+    }
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for viewing by day
+    public void logDayViewEvent() {
+        EventLog.getInstance().logEvent(new Event("Viewed " + name + "'s " + "purchases by day"));
+    }
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for viewing by month
+    public void logMonthViewEvent() {
+        EventLog.getInstance().logEvent(new Event("Viewed " + name + "'s " + "purchases by month"));
+    }
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for viewing by year
+    public void logYearViewEvent() {
+        EventLog.getInstance().logEvent(new Event("Viewed " + name + "'s " + "purchases by year"));
+    }
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for viewing by name
+    public void logNameViewEvent() {
+        EventLog.getInstance().logEvent(new Event("Viewed " + name + "'s " + "purchases by name"));
+    }
+
+    // EFFECTS: prints to the console all the events that have been logged since the application started
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString());
+        }
+    }
+
 }

@@ -4,12 +4,14 @@ import model.Expense;
 import model.ListOfExpense;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // applications menu to add expense
 public class AddExpenseMenu extends Menu {
+    // ==============================
+    // FIELDS:
+
     // labels
     private JLabel nameLabel;
     private JLabel amountLabel;
@@ -27,10 +29,15 @@ public class AddExpenseMenu extends Menu {
     private JTextField monthInput;
     private JTextField yearInput;
 
+    // ==============================
+    // CONSTRUCTOR:
+
+    // EFFECTS: creates a add expense menu
     public AddExpenseMenu(ListOfExpense listOfExpense) {
         super(listOfExpense);
 
         frame.setTitle("Budget Tracker: Add Expense");
+        frame.setSize(530, 245);
 
         initializeLabels();
         initializeTextAndButtons();
@@ -40,6 +47,9 @@ public class AddExpenseMenu extends Menu {
         panel.revalidate();
         panel.repaint();
     }
+
+    // ==============================
+    // METHODS:
 
     // MODIFIES: this
     // EFFECTS: initializes and adds text to all the present labels in this menu
@@ -64,10 +74,19 @@ public class AddExpenseMenu extends Menu {
                         nameInput.getText(),
                         Integer.parseInt(dayInput.getText()),
                         Integer.parseInt(monthInput.getText()),
-                        Integer.parseInt(yearInput.getText()));
-                        listOfExpense.addExpense(expense1);
+                        Integer.parseInt(yearInput.getText())
+                );
+                expense1.logCreateEvent();
+
+                listOfExpense.addExpense(expense1);
+                listOfExpense.logAddExpenseEvent();
             }
         });
+    }
+
+    public void invalidEntry() {
+        JFrame invalidEntry = new JFrame();
+        invalidEntry.add(new JLabel("Invalid Entry"));
     }
 
     // MODIFIES: this
@@ -88,27 +107,12 @@ public class AddExpenseMenu extends Menu {
     // EFFECTS: adds all necessary elements to the panel
     @Override
     public void addToPanel() {
-        // expense name
-        panel.add(nameLabel);
-        panel.add(nameInput);
-
-        // expense amount
-        panel.add(amountLabel);
-        panel.add(amountInput);
-
-        // expense day
-        panel.add(dayLabel);
-        panel.add(dayInput);
-
-        // expense month
-        panel.add(monthLabel);
-        panel.add(monthInput);
-
-        // expense year
-        panel.add(yearLabel);
-        panel.add(yearInput);
-
-        panel.add(enter);
+        addLabelandTextField(nameLabel,nameInput,0, panel);
+        addLabelandTextField(amountLabel,amountInput,1, panel);
+        addLabelandTextField(dayLabel,dayInput,2, panel);
+        addLabelandTextField(monthLabel,monthInput,3, panel);
+        addLabelandTextField(yearLabel,yearInput,4, panel);
+        addButton(enter,5,panel);
     }
 
 }

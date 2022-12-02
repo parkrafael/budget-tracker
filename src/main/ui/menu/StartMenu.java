@@ -1,7 +1,12 @@
 package ui.menu;
 
+import model.EventLog;
 import model.ListOfExpense;
 
+import ui.menu.view.DayViewMenu;
+import ui.menu.view.MonthViewMenu;
+import ui.menu.view.NameViewMenu;
+import ui.menu.view.YearViewMenu;
 import ui.persistence.JsonReader;
 import ui.persistence.JsonWriter;
 
@@ -9,21 +14,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // represents application's start menu window
 public class StartMenu extends Menu {
+    // ==============================
+    // FIELDS:
 
     // labels
     private JLabel titleLabel;
-    private JLabel saveMessage = new JLabel("Saved");
-    private JLabel loadMessage = new JLabel("Loaded");
-    private JLabel saveErrorMessage = new JLabel("Error Saving");
-    private JLabel loadErrorMessage = new JLabel("Error Loading");
 
     //buttons
-    private JButton name;
+    private JButton addExpense;
     private JButton dayView;
     private JButton monthView;
     private JButton yearView;
@@ -35,10 +40,14 @@ public class StartMenu extends Menu {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    public StartMenu(ListOfExpense listofExpense, String name) {
+    // ==============================
+    // CONSTRUCTOR:
+
+    // EFFECTS: creates a start view menu
+    public StartMenu(ListOfExpense listofExpense, String addExpense) {
         super(listofExpense);
 
-        String directory = "./data/" + name + ".json";
+        String directory = "./data/" + addExpense + ".json";
 
         jsonWriter = new JsonWriter(directory);
         jsonReader = new JsonReader(directory);
@@ -51,23 +60,27 @@ public class StartMenu extends Menu {
         initializeButtons();
         initializeListeners();
 
-        // creates new panel
-        JPanel imagePanel = new JPanel();
-        imagePanel.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        imagePanel.setLayout(new GridLayout(5, 0, 0, 0));
-        imagePanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
         // adds all buttons to panel
         addToPanel();
+
+        frame.setSize(530, 306);
     }
+
+    // ==============================
+    // METHODS:
 
     // MODIFIES: Menu (super)
     // EFFECTS: initializes the JFrame components present in the menu
     private void initializeApp() {
         frame.setTitle("Budget Tracker");
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                listOfExpense.printLog(EventLog.getInstance());
+            }
+        });
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel.setLayout(new GridLayout(8, 8, 20, 10));
-        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     }
 
     // MODIFIES: this
@@ -75,6 +88,7 @@ public class StartMenu extends Menu {
     @Override
     public void initializeLabels() {
         titleLabel = new JLabel("Budget Tracker");
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 14f));
     }
 
     // MODIFIES: this
@@ -89,7 +103,7 @@ public class StartMenu extends Menu {
     // MODIFIES: this
     // EFFECTS: Initializes button listener for name
     private void initializeNameListener() {
-        name.addActionListener(new ActionListener() {
+        addExpense.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddExpenseMenu addExpenseMenu = new AddExpenseMenu(listOfExpense);
@@ -156,15 +170,13 @@ public class StartMenu extends Menu {
             // saves it to file according to name
             listOfExpense.toJson();
 
-            // success message
-//            panel.remove(saveMessage);
-//            panel.add(saveMessage);
-
+            createFrame("Saved");
+            listOfExpense.logSaveEvent();
         } catch (FileNotFoundException e) {
-            // error message
+            // error
+            createFrame("Error Saving");
         }
     }
-
 
     // MODIFIES: this
     // EFFECTS: if load function is successful, it loads the zoo from the json file to be viewed
@@ -174,20 +186,34 @@ public class StartMenu extends Menu {
             // instantiates jsonReader
             listOfExpense = jsonReader.read();
 
-            // success
-//            panel.remove(loadMessage);
-//            panel.add(loadMessage);
-
+            createFrame("Loaded");
+            listOfExpense.logLoadEvent();
         } catch (IOException e) {
-            // error message
+            // error
+            createFrame("Error Loading");
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates a new frame that indicates whether it has been saved/loaded
+    private void createFrame(String message) {
+        JFrame frame1 = new JFrame();
+        JPanel panel1 = new JPanel();
+        JLabel label1 = new JLabel(message);
+
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        label1.setVerticalAlignment(SwingConstants.CENTER);
+        frame1.add(panel1);
+        frame1.setSize(148, 59);
+        frame1.setVisible(true);
+        panel1.add(label1);
     }
 
     // MODIFIES: this
     // EFFECTS: adds buttons that control the actions to handle naming zoo, creating and viewing habitat,
     // loading and saving
     private void initializeButtons() {
-        name = new JButton("Add Expense");
+        addExpense = new JButton("Add Expense");
         dayView = new JButton("View by Day");
         monthView = new JButton("View By Month");
         yearView = new JButton("View By Year");
@@ -200,15 +226,14 @@ public class StartMenu extends Menu {
     // EFFECTS: adds all the necessary components to the panel
     @Override
     public void addToPanel() {
-        panel.add(titleLabel);
-        panel.add(name);
-        panel.add(dayView);
-        panel.add(monthView);
-        panel.add(yearView);
-        panel.add(nameView);
-        panel.add(save);
-        panel.add(load);
+        addLabel(titleLabel,0,panel);
+        addButton(addExpense,1,panel);
+        addButton(dayView,2,panel);
+        addButton(monthView,3,panel);
+        addButton(yearView,4,panel);
+        addButton(nameView,5,panel);
+        addButton(save,6,panel);
+        addButton(load,7,panel);
     }
-
 
 }

@@ -2,6 +2,7 @@ package ui;
 
 import model.ListOfExpense;
 import ui.menu.UserLoginMenu;
+import ui.menu.view.DayViewMenu;
 
 import java.io.IOException;
 
@@ -13,6 +14,7 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+//       new DayViewMenu(new ListOfExpense(""));
     }
 
 }

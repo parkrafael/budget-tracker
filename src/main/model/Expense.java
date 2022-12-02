@@ -86,4 +86,13 @@ public class Expense implements Writable {
         return json;
     }
 
+    // ==============================
+    // EVENT LOG:
+
+    // MODIFIES: EventLog
+    // EFFECTS: logs event for creating Expense to EventLog
+    public void logCreateEvent() {
+        EventLog.getInstance().logEvent(new Event("Expense created"));
+    }
+
 }
