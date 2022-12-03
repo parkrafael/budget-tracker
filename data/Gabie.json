@@ -1,0 +1,10 @@
+{
+    "name": "Gabie",
+    "expenses": [{
+        "amount": 450.12,
+        "month": 12,
+        "year": 2022,
+        "name": "Necklace",
+        "day": 2
+    }]
+}

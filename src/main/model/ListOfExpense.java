@@ -130,7 +130,7 @@ public class ListOfExpense implements Writable {
     // MODIFIES: EventLog
     // EFFECTS: logs event for adding Expense to ListOfExpense
     public void logAddExpenseEvent() {
-        EventLog.getInstance().logEvent(new Event("Added Expense to " + name + "'s" + " List of Expenses"));
+        EventLog.getInstance().logEvent(new Event("Added Expense to " + name + "'s" + " list of expenses"));
     }
 
     // MODIFIES: EventLog
@@ -142,13 +142,13 @@ public class ListOfExpense implements Writable {
     // MODIFIES: EventLog
     // EFFECTS: logs event for saving ListOfExpense to EventLog
     public void logSaveEvent() {
-        EventLog.getInstance().logEvent(new Event("Saved " + name + "'s " + "List of Expenses."));
+        EventLog.getInstance().logEvent(new Event("Saved " + name + "'s " + "List of expenses."));
     }
 
     // MODIFIES: EventLog
     // EFFECTS: logs event for loading ListOfExpense to EventLog
     public void logLoadEvent() {
-        EventLog.getInstance().logEvent(new Event("Loaded " + name + "'s " + "List of Expenses."));
+        EventLog.getInstance().logEvent(new Event("Loaded " + name + "'s " + "list of expenses."));
     }
 
     // MODIFIES: EventLog

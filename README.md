@@ -32,31 +32,31 @@ Phase 3:
 Phase 4: Task 2
 
 Thu Dec 01 20:39:15 PST 2022
-Created a new List of Expenses, name: Gabie
+Created a new List of Expenses, name: Ricky
 
 Thu Dec 01 20:39:29 PST 2022
 Expense created
 
 Thu Dec 01 20:39:29 PST 2022
-Added Expense to Gabie's List of Expenses
+Added Expense to Ricky's List of Expenses
 
 Thu Dec 01 20:39:34 PST 2022
-Viewed Gabie's purchases by day
+Viewed Ricky's purchases by day
 
 Thu Dec 01 20:39:38 PST 2022
-Viewed Gabie's purchases by month
+Viewed Ricky's purchases by month
 
 Thu Dec 01 20:39:42 PST 2022
-Viewed Gabie's purchases by year
+Viewed Ricky's purchases by year
 
 Thu Dec 01 20:39:47 PST 2022
-Viewed Gabie's purchases by name
+Viewed Ricky's purchases by name
 
 Thu Dec 01 20:39:49 PST 2022
-Saved Gabie's List of Expenses.
+Saved Ricky's List of Expenses.
 
 Thu Dec 01 20:39:50 PST 2022
-Loaded Gabie's List of Expenses.
+Loaded Ricky's List of Expenses.
 
 Phase 4: Task 3
 

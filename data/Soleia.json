@@ -1,10 +1,26 @@
 {
     "name": "Soleia",
-    "expenses": [{
-        "amount": 9.12,
-        "month": 12,
-        "year": 2022,
-        "name": "Pickles",
-        "day": 1
-    }]
+    "expenses": [
+        {
+            "amount": 9.12,
+            "month": 12,
+            "year": 2022,
+            "name": "Pickles",
+            "day": 1
+        },
+        {
+            "amount": 100.1,
+            "month": 12,
+            "year": 2022,
+            "name": "Headphones",
+            "day": 2
+        },
+        {
+            "amount": 1000.4,
+            "month": 12,
+            "year": 2022,
+            "name": "Macbook",
+            "day": 2
+        }
+    ]
 }
