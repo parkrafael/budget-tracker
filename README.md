@@ -1,4 +1,4 @@
-# Budget Tracker (CPSC 210 Project)
+# Budget Tracker
 
 For my CPSC 210 project, I will be creating a budget calculator that will allow the user to track their spending
 and budget allowing for more conscientious spending habits.
